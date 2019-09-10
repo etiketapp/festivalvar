@@ -1,0 +1,71 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+
+    <style name="LoadingDialogDefault" parent="android:Theme.DeviceDefault.Light.Dialog">
+        <item name="DialogTitleAppearance">@android:style/TextAppearance.Medium</item>
+        <item name="DialogTitleText">Loading…</item>
+        <item name="DialogSpotCount">5</item>
+        <item name="android:layout_gravity">center</item>
+    </style>
+
+    <style name="SpotsDialog" parent="android:Theme.DeviceDefault.Light.Dialog">
+        <item name="DialogTitleAppearance">@android:style/TextAppearance.Medium</item>
+        <item name="DialogTitleText">Lütfen Bekleyiniz...</item>
+        <item name="DialogSpotColor">#000000</item>
+        <item name="DialogSpotCount">5</item>
+    </style>
+
+
+    <style name="SplashTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="android:windowBackground">@drawable/bg_splash</item>
+
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+
+    <style name="SearchViewTheme" parent="Base.Widget.AppCompat.SearchView">
+        <item name="android:fontFamily">@font/q_medium</item>
+        <item name="android:textColorHint">@color/darker_grey</item>
+        <item name="android:textColor">@color/darker_grey</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:layout_width">12dp</item>
+        <item name="android:layout_height">12dp</item>
+        <item name="searchIcon">@drawable/ic_search_light_grey_24dp</item>
+    </style>
+
+
+
+
+    <style name="bottomNavigation">
+        <item name="android:fontFamily">@font/q_regular</item>
+        <item name="android:textSize">@dimen/bottom_tabs</item>
+    </style>
+
+    <style name="CheckBoxStyle" parent="Base.Theme.AppCompat">
+        <item name="colorAccent">@color/white</item>
+        <item name="colorPrimary">@color/white</item>
+        <item name="android:textColorSecondary">@color/white</item>
+        <item name="android:width">1dp</item>
+    </style>
+
+    <style name="ButtonStyle">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:fontFamily">@font/q_bold</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+</resources>

@@ -1,0 +1,585 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/lighter_Grey"
+        tools:context=".ui.festivaldetail.FestivalDetailActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fitsSystemWindows="true"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:elevation="0dp">
+
+        <include
+                layout="@layout/toolbar_layout"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="none"
+            android:fitsSystemWindows="true"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            android:fillViewport="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@null">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/clViewPager"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintDimensionRatio="h, 1:0.66"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                        android:id="@+id/pagerFestivalDetail"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintDimensionRatio="h, 1:0.66"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:background="@drawable/bg_header"
+                        app:layout_constraintEnd_toEndOf="parent"/>
+
+                <Button
+                        android:id="@+id/btnFestivalDetail"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        app:layout_constraintWidth_percent="0.19"
+                        app:layout_constraintDimensionRatio="h, 1:0.23"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:layout_margin="12dp"
+                        android:text="PERFORMANS"
+                        android:textSize="8sp"
+                        android:textColor="@color/white"
+                        android:fontFamily="@font/q_medium"
+                        android:background="@drawable/bg_festival_green_button"/>
+
+
+                <ImageView
+                        android:id="@+id/ivBlackHeader"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        app:layout_constraintHeight_percent="0.25"
+                        app:layout_constraintBottom_toBottomOf="@id/clViewPager"
+                        app:layout_constraintStart_toStartOf="@id/clViewPager"
+                        app:layout_constraintEnd_toEndOf="@id/clViewPager"
+                        android:adjustViewBounds="true"
+                        android:scaleType="centerCrop"
+                        android:background="@color/black"
+                        android:alpha="0.3"/>
+
+                <TextView
+                        android:id="@+id/tvFestivalTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="14sp"
+                        android:fontFamily="@font/q_medium"
+                        android:textColor="@color/white"
+                        app:layout_constraintTop_toTopOf="@id/ivBlackHeader"
+                        app:layout_constraintBottom_toTopOf="@+id/tvFestivalSubtitle"
+                        android:layout_marginBottom="2dp"
+                        app:layout_constraintVertical_chainStyle="packed"
+                        app:layout_constraintStart_toStartOf="@id/ivBlackHeader"
+                        android:layout_marginStart="8dp"
+                        android:text="Zeytinli Rock Festivali"/>
+
+
+                <TextView
+                        android:id="@+id/tvFestivalSubtitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="12sp"
+                        android:fontFamily="@font/q_regular"
+                        android:textColor="@color/white"
+                        app:layout_constraintTop_toBottomOf="@id/tvFestivalTitle"
+                        app:layout_constraintBottom_toBottomOf="@id/ivBlackHeader"
+                        app:layout_constraintStart_toStartOf="@id/ivBlackHeader"
+                        app:layout_constraintEnd_toEndOf="@id/ivBlackHeader"
+                        android:layout_marginEnd="8dp"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        android:layout_marginStart="8dp"
+                        android:text="Description the party lallaa oh lalala"/>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <com.example.festivalvar.ui.customviews.CircleIndicator
+                    android:id="@+id/indicatorHome"
+                    android:layout_width="wrap_content"
+                    android:layout_height="46dp"
+                    app:ci_margin="6dp"
+                    app:ci_width="8dp"
+                    app:ci_height="8dp"
+                    app:layout_constraintTop_toBottomOf="@id/clViewPager"
+                    app:layout_constraintStart_toStartOf="@id/clViewPager"
+                    app:layout_constraintEnd_toEndOf="@id/clViewPager"
+                    app:ci_drawable="@drawable/indicator_purple_radius"
+                    app:ci_drawable_unselected="@drawable/indicator_purple_radius"
+                    android:layout_marginTop="8dp"/>
+
+            <androidx.cardview.widget.CardView
+                    android:id="@+id/cvLike"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    app:layout_constraintTop_toBottomOf="@id/indicatorHome"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/cvComment"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintWidth_percent="0.17"
+                    android:layout_marginTop="8dp"
+                    app:cardElevation="0dp"
+                    app:cardCornerRadius="7dp"
+                    android:layout_marginStart="16dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+
+                    <ImageView
+                            android:id="@+id/ivDetailLike"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toStartOf="@id/tvDetailLikeCount"
+                            app:layout_constraintHorizontal_chainStyle="packed"
+                            android:layout_marginEnd="8dp"
+
+                            android:background="@drawable/ic_heart_empty"/>
+
+                    <TextView
+                            android:id="@+id/tvDetailLikeCount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/grey"
+                            android:textSize="12sp"
+                            android:fontFamily="@font/q_medium"
+                            app:layout_constraintStart_toEndOf="@id/ivDetailLike"
+                            app:layout_constraintHorizontal_chainStyle="packed"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            android:text="180"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                    android:id="@+id/cvComment"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    app:layout_constraintTop_toBottomOf="@id/indicatorHome"
+                    app:layout_constraintStart_toEndOf="@id/cvLike"
+                    app:layout_constraintEnd_toStartOf="@id/cvCost"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintWidth_percent="0.17"
+                    android:layout_marginTop="8dp"
+                    app:cardElevation="0dp"
+                    app:cardCornerRadius="7dp"
+                    android:layout_marginStart="16dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/containerComment"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+
+                    <ImageView
+                            android:id="@+id/ivDetailComment"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toStartOf="@id/tvDetailCommentCount"
+                            app:layout_constraintHorizontal_chainStyle="packed"
+                            android:layout_marginEnd="8dp"
+
+                            android:background="@drawable/ic_comment"/>
+
+                    <TextView
+                            android:id="@+id/tvDetailCommentCount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/grey"
+                            android:textSize="12sp"
+                            android:fontFamily="@font/q_medium"
+                            app:layout_constraintStart_toEndOf="@id/ivDetailComment"
+                            app:layout_constraintHorizontal_chainStyle="packed"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            android:text="123"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                    android:id="@+id/cvCost"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    app:layout_constraintTop_toBottomOf="@id/indicatorHome"
+                    app:layout_constraintStart_toEndOf="@id/cvComment"
+                    app:layout_constraintWidth_percent="0.22"
+                    app:layout_constraintEnd_toStartOf="@id/cvDraw"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    android:layout_marginTop="8dp"
+                    app:cardElevation="0dp"
+                    app:cardCornerRadius="7dp"
+                    android:layout_marginStart="16dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+
+                    <ImageView
+                            android:id="@+id/ivDetailCost"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toStartOf="@id/tvDetailCost"
+                            app:layout_constraintHorizontal_chainStyle="packed"
+                            android:layout_marginStart="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:background="@drawable/ic_heart_full"/>
+
+                    <TextView
+                            android:id="@+id/tvDetailCost"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/main_purple"
+                            android:textSize="12sp"
+                            android:fontFamily="@font/q_medium"
+                            app:layout_constraintStart_toEndOf="@id/ivDetailCost"
+                            app:layout_constraintHorizontal_chainStyle="packed"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            android:layout_marginEnd="4dp"
+                            android:maxLines="1"
+                            android:ellipsize="end"
+                            android:text="180 TL"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                    android:id="@+id/cvDraw"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    app:layout_constraintTop_toBottomOf="@id/indicatorHome"
+                    app:layout_constraintStart_toEndOf="@id/cvCost"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintWidth_percent="0.22"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginTop="8dp"
+                    app:cardElevation="0dp"
+                    app:cardCornerRadius="7dp"
+                    android:layout_marginStart="16dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                    <ImageView
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            android:background="@color/main_purple"/>
+
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            android:text="Çekilişe Katıl"
+                            android:textColor="@color/white"
+                            android:fontFamily="@font/q_medium"
+                            android:textSize="12sp"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                    android:id="@+id/cvFestivalDetail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardElevation="0dp"
+                    app:cardCornerRadius="7dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    app:layout_constraintTop_toBottomOf="@id/cvLike"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+
+                    <TextView
+                            android:id="@+id/tvFestivalDetailTitle"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            android:textSize="16sp"
+                            android:layout_margin="8dp"
+                            android:text="Festival Hakkında"
+                            android:textColor="@color/grey_text"/>
+
+                    <View
+                            android:id="@+id/viewDetailText"
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            app:layout_constraintTop_toBottomOf="@id/tvFestivalDetailTitle"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginEnd="16dp"
+                            android:layout_marginTop="8dp"
+                            android:background="@color/lighter_Grey"/>
+
+                    <TextView
+                            android:id="@+id/tvFestivalDetailContent"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            app:layout_constraintTop_toBottomOf="@id/viewDetailText"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            android:layout_marginEnd="8dp"
+                            android:textSize="12sp"
+                            android:fontFamily="@font/q_regular"
+                            android:textColor="@color/grey_text"
+                            android:text="Festival Açıklaması"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            android:layout_margin="8dp"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                    android:id="@+id/cvFestivalDetailLocation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardElevation="0dp"
+                    app:cardCornerRadius="7dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    app:layout_constraintTop_toBottomOf="@id/cvFestivalDetail"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+
+                    <TextView
+                            android:id="@+id/tvFestivalDetailLocationTitle"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            android:textSize="16sp"
+                            android:layout_margin="8dp"
+                            android:text="VolksWagen Arena"
+                            android:textColor="@color/grey_text"/>
+
+                    <View
+                            android:id="@+id/viewDetailTextLocation"
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            app:layout_constraintTop_toBottomOf="@id/tvFestivalDetailLocationTitle"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginEnd="16dp"
+                            android:layout_marginTop="8dp"
+                            android:background="@color/lighter_Grey"/>
+
+                    <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            app:layout_constraintTop_toBottomOf="@id/viewDetailTextLocation"
+                            android:layout_marginTop="8dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            android:layout_marginBottom="8dp"
+                            android:adjustViewBounds="true"
+                            android:scaleType="centerCrop"
+                            app:layout_constraintDimensionRatio="h, 1:0.46"
+                            android:background="@drawable/ic_logo"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                    android:id="@+id/cvFestivalDetailAccomodation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardElevation="0dp"
+                    app:cardCornerRadius="7dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    app:layout_constraintTop_toBottomOf="@id/cvFestivalDetailLocation"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+
+                    <TextView
+                            android:id="@+id/tvFestivalDetailAccomodationTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            android:textSize="16sp"
+                            android:layout_margin="8dp"
+                            android:text="Konaklama"
+                            android:textColor="@color/grey_text"/>
+
+                    <View
+                            android:id="@+id/viewDetailTextAccomodation"
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            app:layout_constraintTop_toBottomOf="@id/tvFestivalDetailAccomodationTitle"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginEnd="16dp"
+                            android:layout_marginTop="8dp"
+                            android:background="@color/lighter_Grey"/>
+
+                    <TextView
+                            android:id="@+id/tvFestivalDetailAccomodationContent"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            app:layout_constraintTop_toBottomOf="@id/viewDetailTextAccomodation"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            android:textSize="12sp"
+                            android:fontFamily="@font/q_regular"
+                            android:textColor="@color/grey_text"
+                            android:text="Konaklama Açıklaması"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            android:layout_margin="8dp"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                    android:id="@+id/cvFestivalDetailReccomendation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardElevation="0dp"
+                    app:cardCornerRadius="7dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    app:layout_constraintTop_toBottomOf="@id/cvFestivalDetailAccomodation"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintVertical_bias="0.0"
+                    android:layout_marginBottom="16dp"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+
+                    <TextView
+                            android:id="@+id/tvFestivalDetailReccomendationTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            android:textSize="16sp"
+                            android:layout_margin="8dp"
+                            android:text="Tavsiyeler"
+                            android:textColor="@color/grey_text"/>
+
+                    <View
+                            android:id="@+id/viewDetailTextReccomendation"
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            app:layout_constraintTop_toBottomOf="@id/tvFestivalDetailReccomendationTitle"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginEnd="16dp"
+                            android:layout_marginTop="8dp"
+                            android:background="@color/lighter_Grey"/>
+
+                    <TextView
+                            android:id="@+id/tvFestivalDetailReccomendationContent"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            app:layout_constraintTop_toBottomOf="@id/viewDetailTextReccomendation"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            android:textSize="12sp"
+                            android:fontFamily="@font/q_regular"
+                            android:textColor="@color/grey_text"
+                            android:text="Tavsiye Açıklaması"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            android:layout_margin="8dp"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </androidx.cardview.widget.CardView>
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

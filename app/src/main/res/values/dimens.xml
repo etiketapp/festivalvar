@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <dimen name="font_small">12dp</dimen>
+    <dimen name="font_medium">14dp</dimen>
+    <dimen name="font_xlarge">18dp</dimen>
+
+    <dimen name="tab_paddings">32dp</dimen>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <dimen name="design_bottom_navigation_text_size" tools:override="true">8dp</dimen>
+    <dimen name="design_bottom_navigation_active_text_size" tools:override="true">9dp</dimen>
+    <dimen name="bottom_tabs">32dp</dimen>
+
+    <!-- Default screen margins, per the Android Design guidelines. -->
+
+    <!--billing-->
+
+    <!-- CardViewStyle -->
+
+</resources>

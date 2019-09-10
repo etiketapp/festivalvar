@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">festivalvar</string>
+
+
+    //register
+    <string name="auth_register">ÜYE OL</string>
+    <string name="auth_login">GİRİŞ YAP</string>
+    <string name="auth_fullname">Ad Soyad</string>
+    <string name="auth_mail">E - Posta</string>
+    <string name="auth_password">Parola</string>
+    <string name="auth_agreement">Kullanım Koşulları\'nı ve Gizlilik Sözleşmesi\'ni okudum kabul ediyorum.</string>
+    <string name="auth_forgot_password">Şifreni mi unuttun?</string>
+
+    <string name="menu_home">Festivaller</string>
+    <string name="menu_messages">Mesajlar</string>
+    <string name="menu_notifications">Bildirimler</string>
+    <string name="menu_profile">Profil</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+</resources>
