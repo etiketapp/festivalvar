@@ -22,6 +22,8 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
+        <activity android:name=".ui.profile.profilesettings.ProfileSettingsActivity">
+        </activity>
         <activity android:name=".ui.comments.CommentsActivity">
         </activity>
         <activity android:name=".ui.festivaldetail.FestivalDetailActivity">
@@ -31,27 +33,23 @@
         <activity
                 android:name=".ui.splash.SplashActivity"
                 android:theme="@style/SplashTheme">
-
-
-        </activity>
-        <activity android:name=".ui.main.MainActivity">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
+        </activity>
+        <activity android:name=".ui.main.MainActivity">
 
         </activity>
 
         <meta-data
                 android:name="com.google.android.geo.API_KEY"
                 android:value="AIzaSyDTmTZ18GngOcJzN5pwLpIvh1GGs8WNdcE"/>
+
         <uses-library
                 android:name="com.google.android.maps"
                 android:required="true"/>
     </application>
-
-
 
 </manifest>

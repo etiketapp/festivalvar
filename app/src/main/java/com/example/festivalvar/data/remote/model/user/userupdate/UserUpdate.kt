@@ -1,4 +1,4 @@
-package com.example.festivalvar.data.remote.model.user
+package com.example.festivalvar.data.remote.model.user.userupdate
 
 import android.os.Parcelable
 import com.example.festivalvar.data.remote.model.image.ImageModel
@@ -6,9 +6,8 @@ import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 
-
 @Parcelize
-data class User (
+class UserUpdate (
     @SerializedName("id")
     @Expose
     val id:Int,
@@ -34,4 +33,3 @@ data class User (
     @Expose
     val image: ImageModel? = null
 ) : Parcelable
-

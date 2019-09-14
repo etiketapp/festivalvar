@@ -7,14 +7,31 @@ import com.example.festivalvar.data.remote.model.auth.forgotpassword.ForgotPassw
 import com.example.festivalvar.data.remote.model.auth.forgotpassword.ForgotPasswordResponse
 import com.example.festivalvar.data.remote.model.auth.login.LoginRequest
 import com.example.festivalvar.data.remote.model.auth.login.LoginResponse
+import com.example.festivalvar.data.remote.model.auth.logout.LogoutResponse
 import com.example.festivalvar.data.remote.model.auth.register.RegisterRequest
 import com.example.festivalvar.data.remote.model.auth.register.RegisterResponse
+import com.example.festivalvar.data.remote.model.user.UserResponse
+import com.example.festivalvar.data.remote.model.user.userupdate.UserUpdateResponse
 import com.example.festivalvar.data.remote.network.ResultWrapper
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 
 class DataManager(
     private val remoteDataManager: RemoteDataManager,
     private val localDataManager: LocalDataManager
 ) : IDataManager {
+    override suspend fun postLogoutAsync(): ResultWrapper<LogoutResponse> = remoteDataManager.postLogoutAsync()
+
+    override suspend fun getUserMeAsync(): ResultWrapper<UserResponse> = remoteDataManager.getUserMeAsync()
+
+
+    override suspend fun updateProfileAsync(
+        _method: RequestBody,
+        image: MultipartBody.Part?,
+        full_name: RequestBody,
+        email: RequestBody
+    ): ResultWrapper<UserUpdateResponse> =
+        remoteDataManager.updateProfileAsync(_method, image, full_name, email)
 
     override suspend fun getFestivalAsync(): ResultWrapper<FestivalModelResponse> = remoteDataManager.getFestivalAsync()
 

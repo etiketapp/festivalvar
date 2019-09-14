@@ -8,6 +8,7 @@ import com.example.festivalvar.ui.main.MainViewModel
 import com.example.festivalvar.ui.messages.MessagesFragmentViewModel
 import com.example.festivalvar.ui.notifications.NotificationsViewModel
 import com.example.festivalvar.ui.profile.ProfileViewModel
+import com.example.festivalvar.ui.profile.profilesettings.ProfileSettingsViewModel
 import com.example.festivalvar.ui.splash.SplashViewModel
 import org.koin.androidx.viewmodel.ext.koin.viewModel
 import org.koin.dsl.module.module
@@ -22,6 +23,7 @@ val viewModelModule = module {
     viewModel { ProfileViewModel(get()) }
     viewModel { FestivalDetailViewModel(get()) }
     viewModel { CommentsViewModel(get()) }
+    viewModel { ProfileSettingsViewModel(get()) }
 
 
 }

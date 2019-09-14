@@ -3,6 +3,7 @@ package com.example.festivalvar.utils
 import android.content.Context
 import android.content.SharedPreferences
 import com.example.festivalvar.CoreApp
+import com.example.festivalvar.data.remote.model.user.User
 import com.example.festivalvar.utils.AppConstants.IS_USER_LOGGED
 import com.example.festivalvar.utils.AppConstants.PREF_NAME
 import com.example.festivalvar.utils.AppConstants.TOKEN
@@ -40,6 +41,14 @@ object PrefUtils {
     }
 
 
+    fun set(user: String) {
+
+        instance.removeValue(USER_DETAIL)
+        instance.setValue(USER_DETAIL, user)
+
+    }
+
+
     fun createUser(user: String) {
 
         if (!isLoggedUser()) {
@@ -53,6 +62,12 @@ object PrefUtils {
 
     }
 
+    fun getUser(): User {
+
+        return GsonBuilder().create().fromJson(instance.getString(USER_DETAIL, ""), User::class.java)
+
+    }
+
 
     fun getToken(): String {
         if (instance.getString(TOKEN, null).isNullOrEmpty()) {
@@ -61,6 +76,17 @@ object PrefUtils {
             return GsonBuilder().create().fromJson(instance.getString(TOKEN, ""), String::class.java)
         }
     }
+
+    fun logoutUser() {
+
+        instance.setValue(IS_USER_LOGGED, false)
+
+        instance.removeValue(USER_DETAIL)
+
+        instance.removeValue(TOKEN)
+
+    }
+
 
 
 }

@@ -4,6 +4,7 @@ import com.example.festivalvar.data.remote.model.auth.forgotpassword.ForgotPassw
 import com.example.festivalvar.data.remote.model.auth.forgotpassword.ForgotPasswordResponse
 import com.example.festivalvar.data.remote.model.auth.login.LoginRequest
 import com.example.festivalvar.data.remote.model.auth.login.LoginResponse
+import com.example.festivalvar.data.remote.model.auth.logout.LogoutResponse
 import com.example.festivalvar.data.remote.model.auth.register.RegisterRequest
 import com.example.festivalvar.data.remote.model.auth.register.RegisterResponse
 import kotlinx.coroutines.Deferred
@@ -23,5 +24,9 @@ interface IAuthService {
 
     @POST("auth/forgot")
     fun postForgotPassword(@Body request: ForgotPasswordRequest): Deferred<Response<ForgotPasswordResponse>>
+
+
+    @POST("auth/logout")
+    fun postLogout(): Deferred<Response<LogoutResponse>>
 
 }

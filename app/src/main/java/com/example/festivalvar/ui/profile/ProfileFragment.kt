@@ -4,7 +4,11 @@ import android.view.View
 import com.addisonelliott.segmentedbutton.SegmentedButtonGroup
 import com.example.festivalvar.R
 import com.example.festivalvar.ui.base.BaseFragment
+import com.example.festivalvar.ui.profile.profilesettings.ProfileSettingsActivity
+import com.example.festivalvar.utils.PrefUtils
+import com.mobillium.birebirdiyet.utils.extensions.launchActivity
 import kotlinx.android.synthetic.main.fragment_profile.*
+import kotlinx.android.synthetic.main.toolbar_layout.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ProfileFragment : BaseFragment(), IProfileNavigator {
@@ -18,10 +22,18 @@ class ProfileFragment : BaseFragment(), IProfileNavigator {
     }
 
     override fun initUI() {
+
+        tvToolbarTitle.visibility = View.VISIBLE
+        iv_list.visibility = View.GONE
+        tvToolbarTitle.text = PrefUtils.getUser().full_name
     }
 
     override fun initListener() {
         handleSegmentedButton()
+
+        ivSettings.setOnClickListener {
+            context!!.launchActivity<ProfileSettingsActivity> {  }
+        }
     }
 
     private fun handleSegmentedButton() {
