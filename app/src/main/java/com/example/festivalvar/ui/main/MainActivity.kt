@@ -1,6 +1,8 @@
 package com.example.festivalvar.ui.main
 
+import android.os.Build
 import android.view.View
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import com.example.festivalvar.R
 import com.example.festivalvar.ui.base.BaseActivity
@@ -23,14 +25,13 @@ class MainActivity : BaseActivity(), IMainNavigator {
         viewModel.setNavigator(this)
     }
 
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun initUI() {
         replaceFragment(HomeFragment())
-        iv_list.visibility = View.VISIBLE
-        iv_filter.visibility = View.VISIBLE
-        ivToolbarLogo.visibility = View.VISIBLE
 
     }
 
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun initListener() {
 
         bottom_navigation.setOnNavigationItemSelectedListener { menuItem ->
@@ -41,21 +42,17 @@ class MainActivity : BaseActivity(), IMainNavigator {
                 R.id.nav_home -> {
                     MAIN_TAB_VALUE = "HOME"
                     selectedFragment = HomeFragment()
-                    iv_list.visibility = View.VISIBLE
-                    iv_filter.visibility = View.VISIBLE
-                    ivToolbarLogo.visibility = View.VISIBLE
-                    tvToolbarTitle.visibility = View.GONE
 
                 }
                 R.id.nav_message -> {
                     MAIN_TAB_VALUE = "MESSAGES"
                     selectedFragment = MessagesFragment()
-
+/*
                     iv_list.visibility = View.GONE
                     iv_filter.visibility = View.GONE
                     ivToolbarLogo.visibility = View.GONE
                     tvToolbarTitle.visibility = View.VISIBLE
-                    tvToolbarTitle.text = "Mesajlar"
+                    tvToolbarTitle.text = "Mesajlar"*/
 
                 }
 
@@ -66,12 +63,12 @@ class MainActivity : BaseActivity(), IMainNavigator {
                 R.id.nav_profile -> {
                     MAIN_TAB_VALUE = "PROFILE"
                     selectedFragment = ProfileFragment()
-
+/*
                     iv_list.visibility = View.GONE
                     iv_filter.visibility = View.GONE
                     ivToolbarLogo.visibility = View.GONE
                     tvToolbarTitle.visibility = View.VISIBLE
-                    tvToolbarTitle.text = "Bade Soyar"
+                    tvToolbarTitle.text = "Bade Soyar"*/
                 }
 
             }

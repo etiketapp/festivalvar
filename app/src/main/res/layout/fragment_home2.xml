@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<androidx.coordinatorlayout.widget.CoordinatorLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -10,10 +10,30 @@
         android:background="@color/light_grey"
         tools:context=".ui.home.HomeFragment">
 
+
+    <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:elevation="0dp"
+            android:theme="@style/AppTheme.AppBarOverlay">
+
+        <include layout="@layout/toolbar_layout"
+                 app:layout_constraintEnd_toEndOf="parent"
+                 app:layout_constraintStart_toStartOf="parent"
+                 app:layout_constraintTop_toTopOf="parent"/>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+
     <androidx.core.widget.NestedScrollView
             android:id="@+id/svFestival"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
             android:fitsSystemWindows="true"
             android:fillViewport="true">
 
@@ -57,7 +77,6 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-
             <RelativeLayout
                     android:id="@+id/rlMap"
                     android:layout_width="match_parent"
@@ -66,7 +85,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    android:visibility="visible">
+                    android:visibility="gone">
 
                 <fragment
                         android:id="@+id/mapFestival"
@@ -74,12 +93,47 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"/>
 
-
                 <ImageView
                         android:id="@+id/transparent_image"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:src="@color/transparent"/>
+
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginBottom="24dp">
+
+
+                    <androidx.recyclerview.widget.RecyclerView
+                            android:nestedScrollingEnabled="false"
+                            android:id="@+id/rvFestivalMapList"
+                            android:orientation="horizontal"
+                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                            tools:listitem="@layout/row_festival_map_item"
+                            android:layout_marginEnd="8dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"/>
+
+<!--
+                    <include
+                            android:layout_width="230dp"
+                            android:layout_height="wrap_content"
+                            layout="@layout/row_festival_map_item"/>
+
+                    <include
+                            android:layout_width="230dp"
+                            android:layout_height="wrap_content"
+                            layout="@layout/row_festival_map_item"/>
+
+                    <include
+                            android:layout_width="230dp"
+                            android:layout_height="wrap_content"
+                            layout="@layout/row_festival_map_item"/>-->
+
+                </LinearLayout>
+
 
             </RelativeLayout>
 
@@ -112,4 +166,4 @@
     </androidx.core.widget.NestedScrollView>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

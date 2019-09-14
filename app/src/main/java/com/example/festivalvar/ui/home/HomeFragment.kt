@@ -2,10 +2,8 @@ package com.example.festivalvar.ui.home
 
 import android.annotation.SuppressLint
 import android.os.Build
-import android.view.MenuItem
 import android.view.MotionEvent
 import android.view.View
-import android.widget.Toolbar
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.Observer
 import com.example.festivalvar.R
@@ -14,24 +12,28 @@ import com.example.festivalvar.data.remote.model.location.LocationModel
 import com.example.festivalvar.ui.base.BaseFragment
 import com.example.festivalvar.ui.festivaldetail.FestivalDetailActivity
 import com.example.festivalvar.ui.home.festivaladapter.AdapterFestival
+import com.example.festivalvar.ui.home.festivaladapter.FestivalMapAdapter
 import com.example.festivalvar.ui.home.festivalviewholder.FestivalClickListener
-import com.google.android.gms.maps.*
+import com.example.festivalvar.ui.home.festivalviewholder.FestivalMapClickListener
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.*
 import com.mobillium.birebirdiyet.utils.extensions.launchActivity
 import kotlinx.android.synthetic.main.fragment_home2.*
 import kotlinx.android.synthetic.main.toolbar_layout.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-
-
-
 @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-class HomeFragment : BaseFragment(), IHomeNavigator, FestivalClickListener, OnMapReadyCallback {
+
+class HomeFragment : BaseFragment(), IHomeNavigator, FestivalClickListener, FestivalMapClickListener, OnMapReadyCallback {
 
     override val layoutId: Int
         get() = R.layout.fragment_home2
 
     companion object {
+
         var map: GoogleMap? = null
         var marker: Marker? = null
 
@@ -41,10 +43,13 @@ class HomeFragment : BaseFragment(), IHomeNavigator, FestivalClickListener, OnMa
     var festivalLocations: ArrayList<LocationModel>? = arrayListOf()
     private var festivalModel: ArrayList<FestivalModel> = arrayListOf()
 
+    var statement: Boolean = false
+
 
     private val viewModel by viewModel<HomeViewModel>()
 
     private val festivalAdapter by lazy { AdapterFestival(arrayListOf(), this) }
+    private val festivalMapAdapter by lazy { FestivalMapAdapter(arrayListOf(), this) }
 
 
     override fun initNavigator() {
@@ -53,6 +58,16 @@ class HomeFragment : BaseFragment(), IHomeNavigator, FestivalClickListener, OnMa
     }
 
     override fun initUI() {
+
+
+        iv_list.visibility = View.VISIBLE
+        iv_filter.visibility = View.VISIBLE
+        ivToolbarLogo.visibility = View.VISIBLE
+        tvToolbarTitle.visibility = View.GONE
+
+        linearFestivalContainer.visibility = View.VISIBLE
+        clServiceSearch.visibility = View.VISIBLE
+
         setMap()
         mapScrollable()
         observeViewModelFestival()
@@ -61,6 +76,29 @@ class HomeFragment : BaseFragment(), IHomeNavigator, FestivalClickListener, OnMa
     }
 
     override fun initListener() {
+
+        iv_list.setOnClickListener {
+
+            statement = !statement
+
+            if(statement) {
+
+                rlMap.visibility = View.VISIBLE
+                linearFestivalContainer.visibility = View.GONE
+                clServiceSearch.visibility = View.GONE
+
+                iv_list.setImageDrawable(resources.getDrawable(R.drawable.ic_nav_map))
+
+            } else {
+
+                rlMap.visibility = View.GONE
+                linearFestivalContainer.visibility = View.VISIBLE
+                clServiceSearch.visibility = View.VISIBLE
+
+                iv_list.setImageDrawable(resources.getDrawable(R.drawable.ic_nav_list))
+            }
+
+        }
 
     }
 
@@ -75,6 +113,9 @@ class HomeFragment : BaseFragment(), IHomeNavigator, FestivalClickListener, OnMa
 
         rvFestivalList.adapter = festivalAdapter
         festivalAdapter.add(data)
+
+        rvFestivalMapList.adapter = festivalMapAdapter
+        festivalMapAdapter.add(data)
 
         for (x in 0 until (data.size)) {
             festivalLocations?.add(data[x].location)
@@ -157,7 +198,5 @@ class HomeFragment : BaseFragment(), IHomeNavigator, FestivalClickListener, OnMa
             }
         })
     }
-
-
 
 }
