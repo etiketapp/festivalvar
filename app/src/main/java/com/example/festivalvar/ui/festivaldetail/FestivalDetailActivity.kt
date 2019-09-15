@@ -30,9 +30,6 @@ class FestivalDetailActivity : BaseActivity(), IFestivalDetailNavigator, OnMapRe
     private var marker: Marker? = null
     var festivalLatLng: ArrayList<LatLng> = arrayListOf()
 
-
-    var dataSlider: ArrayList<Int> = arrayListOf(R.drawable.bg_header, R.drawable.bg_header)
-
     //private val festivalModel: FestivalModel? = null
 
 
@@ -159,7 +156,6 @@ class FestivalDetailActivity : BaseActivity(), IFestivalDetailNavigator, OnMapRe
                     )
                 )
             }
-
 
             val position = CameraPosition.Builder()
                 .target(fesitvalLocation)

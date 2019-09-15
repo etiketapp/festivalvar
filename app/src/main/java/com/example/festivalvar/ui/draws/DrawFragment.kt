@@ -5,6 +5,8 @@ import androidx.lifecycle.Observer
 import com.example.festivalvar.R
 import com.example.festivalvar.data.remote.model.draws.DrawsModel
 import com.example.festivalvar.ui.base.BaseFragment
+import com.example.festivalvar.ui.draws.drawsdetail.DrawsDetailActivity
+import com.mobillium.birebirdiyet.utils.extensions.launchActivity
 import kotlinx.android.synthetic.main.fragment_draw.*
 import kotlinx.android.synthetic.main.toolbar_layout.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -47,6 +49,10 @@ class DrawFragment : BaseFragment(), IDrawFragmentNavigator, DrawsClickListener 
     }
 
     override fun onClick(model: DrawsModel) {
+        activity!!.launchActivity<DrawsDetailActivity> {
+            this.putExtra("fromDrawsFragmentToDrawsDetail", model)
+        }
+
     }
 
 

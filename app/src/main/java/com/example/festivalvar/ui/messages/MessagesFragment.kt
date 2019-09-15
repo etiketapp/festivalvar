@@ -1,7 +1,9 @@
 package com.example.festivalvar.ui.messages
 
+import android.view.View
 import com.example.festivalvar.R
 import com.example.festivalvar.ui.base.BaseFragment
+import kotlinx.android.synthetic.main.toolbar_layout.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -15,6 +17,8 @@ class MessagesFragment : BaseFragment(), IMessagesFragmentNavigator {
     }
 
     override fun initUI() {
+        tvToolbarTitle.visibility = View.VISIBLE
+        tvToolbarTitle.setText("Mesajlar")
     }
 
     override fun initListener() {

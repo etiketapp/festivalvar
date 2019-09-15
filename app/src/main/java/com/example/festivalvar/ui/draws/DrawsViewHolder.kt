@@ -15,7 +15,7 @@ class DrawsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
                 tvProfileNameItem.text = model.title
                 tvProfileDetailItem.text = model.title*/
 
-            ivFestivalItem.load(model.galleries[0].image.url!!)
+            ivFestivalItem.load(model.galleries!![0].image.url!!)
         //Glide.with(context).load(model.image?.url).into(ivFestivalItem)
         tvFestivalTitle.text = model.title
         tvFestivalSubtitle.text = model.sub_title
