@@ -10,6 +10,7 @@ import com.example.festivalvar.data.remote.model.auth.login.LoginResponse
 import com.example.festivalvar.data.remote.model.auth.logout.LogoutResponse
 import com.example.festivalvar.data.remote.model.auth.register.RegisterRequest
 import com.example.festivalvar.data.remote.model.auth.register.RegisterResponse
+import com.example.festivalvar.data.remote.model.draws.DrawsModelResponse
 import com.example.festivalvar.data.remote.model.user.UserResponse
 import com.example.festivalvar.data.remote.model.user.userupdate.UserUpdateResponse
 import com.example.festivalvar.data.remote.network.ResultWrapper
@@ -20,10 +21,11 @@ class DataManager(
     private val remoteDataManager: RemoteDataManager,
     private val localDataManager: LocalDataManager
 ) : IDataManager {
+    override suspend fun getDrawsAsync(): ResultWrapper<DrawsModelResponse> = remoteDataManager.getDrawsAsync()
+
     override suspend fun postLogoutAsync(): ResultWrapper<LogoutResponse> = remoteDataManager.postLogoutAsync()
 
     override suspend fun getUserMeAsync(): ResultWrapper<UserResponse> = remoteDataManager.getUserMeAsync()
-
 
     override suspend fun updateProfileAsync(
         _method: RequestBody,

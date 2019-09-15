@@ -1,18 +1,12 @@
 package com.example.festivalvar.ui.festivaldetail
 
-import android.graphics.drawable.Drawable
 import android.view.MotionEvent
 import android.view.View
-import androidx.viewpager.widget.ViewPager
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.target.CustomTarget
-import com.bumptech.glide.request.transition.Transition
 import com.example.festivalvar.R
 import com.example.festivalvar.data.remote.model.FestivalModel.FestivalModel
 import com.example.festivalvar.data.remote.model.FestivalModel.Galleries
 import com.example.festivalvar.ui.base.BaseActivity
 import com.example.festivalvar.ui.comments.CommentsActivity
-import com.example.festivalvar.ui.home.HomeFragment
 import com.example.festivalvar.utils.extensions.overridePendingTransitionEnter
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -20,9 +14,7 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.*
 import com.mobillium.birebirdiyet.utils.extensions.launchActivity
-import com.mobillium.birebirdiyet.utils.extensions.load
 import kotlinx.android.synthetic.main.activity_festival_detail.*
-import kotlinx.android.synthetic.main.row_messages_item.*
 import kotlinx.android.synthetic.main.toolbar_layout.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -101,7 +93,6 @@ class FestivalDetailActivity : BaseActivity(), IFestivalDetailNavigator, OnMapRe
         }
 
         private fun initSlider(data: ArrayList<Galleries>) {
-            //viewPager = view?.findViewById<View>(R.id.pagerFestivalDetail) as ViewPager
             val adapter = SliderViewPagerAdapter(applicationContext, data)
             pagerFestivalDetail?.adapter = adapter
             indicatorHome?.setViewPager(pagerFestivalDetail)
@@ -159,7 +150,6 @@ class FestivalDetailActivity : BaseActivity(), IFestivalDetailNavigator, OnMapRe
             festivalLatLng.add(fesitvalLocation)
 
 
-
             festivalLatLng.forEach {
                 marker = map.addMarker(
                     MarkerOptions().position(it).icon(
@@ -168,8 +158,6 @@ class FestivalDetailActivity : BaseActivity(), IFestivalDetailNavigator, OnMapRe
                         )
                     )
                 )
-
-
             }
 
 

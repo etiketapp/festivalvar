@@ -18,7 +18,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             android:fillViewport="true"
             android:fitsSystemWindows="true"
-            android:background="@drawable/bg_header">
+            android:background="@drawable/bg_splash_purple">
 
         <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"

@@ -3,20 +3,17 @@
             xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
-
-
     <item
-            android:drawable="@drawable/bg_header"
-    android:gravity="fill">
+            android:drawable="@drawable/bg_splash_purple"
+            android:gravity="fill">
 
     </item>
 
     <item
             android:drawable="@drawable/ic_logo"
-    android:gravity="center">
+            android:gravity="center">
 
     </item>
-
 
 
 </layer-list>

@@ -12,6 +12,7 @@
     <string name="auth_forgot_password">Şifreni mi unuttun?</string>
 
     <string name="menu_home">Festivaller</string>
+    <string name="menu_draws">Çekilişler</string>
     <string name="menu_messages">Mesajlar</string>
     <string name="menu_notifications">Bildirimler</string>
     <string name="menu_profile">Profil</string>

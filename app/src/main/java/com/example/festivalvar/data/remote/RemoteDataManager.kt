@@ -9,12 +9,14 @@ import com.example.festivalvar.data.remote.model.auth.login.LoginResponse
 import com.example.festivalvar.data.remote.model.auth.logout.LogoutResponse
 import com.example.festivalvar.data.remote.model.auth.register.RegisterRequest
 import com.example.festivalvar.data.remote.model.auth.register.RegisterResponse
+import com.example.festivalvar.data.remote.model.draws.DrawsModelResponse
 import com.example.festivalvar.data.remote.model.user.UserResponse
 import com.example.festivalvar.data.remote.model.user.userupdate.UserUpdateResponse
 import com.example.festivalvar.data.remote.network.RemoteDataException
 import com.example.festivalvar.data.remote.network.ResultWrapper
 import com.example.festivalvar.data.remote.service.IAuthService
 import com.example.festivalvar.data.remote.service.IFestivalService
+import com.example.festivalvar.data.remote.service.draws.IDrawsService
 import com.example.festivalvar.data.remote.service.user.IUserService
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
@@ -26,8 +28,14 @@ import retrofit2.Response
 class RemoteDataManager(
     private val authService: IAuthService,
     private val festivalService: IFestivalService,
-    private val userService: IUserService
+    private val userService: IUserService,
+    private val drawsService: IDrawsService
 ) : IRemoteDataManager {
+    override suspend fun getDrawsAsync(): ResultWrapper<DrawsModelResponse> = withContext(Dispatchers.Main) {
+        resultWrapper(drawsService.getDraws())
+
+    }
+
     override suspend fun getUserMeAsync(): ResultWrapper<UserResponse> = withContext(Dispatchers.Main) {
         resultWrapper(userService.getUserMe())
 

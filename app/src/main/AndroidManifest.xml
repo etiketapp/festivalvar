@@ -22,6 +22,8 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
+        <activity android:name=".ui.draws.drawsdetail.DrawsDetailActivity">
+        </activity>
         <activity android:name=".ui.profile.profilesettings.ProfileSettingsActivity">
         </activity>
         <activity android:name=".ui.comments.CommentsActivity">
@@ -32,6 +34,7 @@
         </activity>
         <activity
                 android:name=".ui.splash.SplashActivity"
+                android:noHistory="true"
                 android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -39,8 +42,9 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".ui.main.MainActivity">
-
+        <activity
+                android:name=".ui.main.MainActivity"
+                android:launchMode="singleTop">
         </activity>
 
         <meta-data

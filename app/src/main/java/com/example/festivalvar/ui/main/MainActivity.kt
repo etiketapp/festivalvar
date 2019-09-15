@@ -6,6 +6,7 @@ import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import com.example.festivalvar.R
 import com.example.festivalvar.ui.base.BaseActivity
+import com.example.festivalvar.ui.draws.DrawFragment
 import com.example.festivalvar.ui.home.HomeFragment
 import com.example.festivalvar.ui.messages.MessagesFragment
 import com.example.festivalvar.ui.notifications.NotificationsFragment
@@ -43,6 +44,11 @@ class MainActivity : BaseActivity(), IMainNavigator {
                     MAIN_TAB_VALUE = "HOME"
                     selectedFragment = HomeFragment()
 
+                }
+
+                R.id.nav_draws -> {
+                    MAIN_TAB_VALUE = "DRAWS"
+                    selectedFragment = DrawFragment()
                 }
                 R.id.nav_message -> {
                     MAIN_TAB_VALUE = "MESSAGES"
