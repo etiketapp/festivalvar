@@ -8,11 +8,13 @@ import android.widget.ImageView
 import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager
 import com.example.festivalvar.R
+import com.example.festivalvar.data.remote.model.FestivalModel.FestivalModel
+import com.example.festivalvar.data.remote.model.FestivalModel.Galleries
 import com.mobillium.birebirdiyet.utils.extensions.loadFromUrl
 
 class SliderViewPagerAdapter(
     private val context: Context,
-    private val sliders: ArrayList<Int>): PagerAdapter() {
+    private val sliders: ArrayList<Galleries>): PagerAdapter() {
     private var layoutInflater: LayoutInflater? = null
     private val images = arrayOf(R.drawable.bg_header, R.drawable.bg_header, R.drawable.bg_header, R.drawable.bg_header)
 
@@ -29,7 +31,7 @@ class SliderViewPagerAdapter(
         layoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val v = layoutInflater!!.inflate(R.layout.row_slider_vp_item, null)
         val image = v.findViewById<View>(R.id.imageView) as ImageView
-        //image.loadFromUrl(sliders[position].sliderImage.url)
+        image.loadFromUrl(sliders[position].image.url!!)
         images[0]
 
         val vp = container as ViewPager

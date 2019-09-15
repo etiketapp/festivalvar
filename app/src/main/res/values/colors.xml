@@ -23,6 +23,7 @@
     <color name="grey_text">#3b3b3b</color>
     <color name="grey_view">#d8d8d8</color>
     <color name="grey_edittext">#acacac</color>
+    <color name="grey_background">#e3e3e3</color>
 
     <color name="green">#00ca03</color>
 

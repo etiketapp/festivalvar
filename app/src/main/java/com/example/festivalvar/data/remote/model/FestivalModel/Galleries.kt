@@ -14,13 +14,13 @@ class Galleries (
     val id: Int,
     @SerializedName("updated_at")
     @Expose
-    val updated_at: String,
+    val updated_at: String? = null,
     @SerializedName("created_at")
     @Expose
-    val created_at: String,
+    val created_at: String? = null,
     @SerializedName("festival_id")
     @Expose
-    val festival_id: String,
+    val festival_id: String? = null,
     @SerializedName("image")
     @Expose
     val image: ImageModel

@@ -14,8 +14,8 @@ class FestivalViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
                 tvProfileNameItem.text = model.title
                 tvProfileDetailItem.text = model.title*/
 
-        //if(model.image != null)ivFestivalItem.load(model.image.url!!)
-        Glide.with(context).load(model.image?.url).into(ivFestivalItem)
+            ivFestivalItem.load(model.galleries[0].image.url!!)
+        //Glide.with(context).load(model.image?.url).into(ivFestivalItem)
         tvFestivalTitle.text = model.title
         tvFestivalSubtitle.text = model.sub_title
         tvFestivalCost.text = (model.price + " TL")
