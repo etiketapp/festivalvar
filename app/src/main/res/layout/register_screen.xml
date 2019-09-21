@@ -6,8 +6,8 @@
         android:layout_height="match_parent"
         android:focusableInTouchMode="true">
 
-    <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/etFullname"
+    <EditText
+            android:id="@+id/etFullname1"
             android:layout_width="match_parent"
             android:layout_height="52dp"
             app:layout_constraintTop_toTopOf="parent"
@@ -17,92 +17,60 @@
             android:layout_marginEnd="24dp"
             android:background="@drawable/bg_edittext"
             android:layout_marginTop="24dp"
-            android:textColorHint="@color/white">
+            android:paddingStart="16dp"
+            android:cursorVisible="false"
+            android:fontFamily="@font/q_regular"
+            android:textSize="14sp"
+            android:hint="@string/auth_fullname"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"/>
 
-        <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etFullname1"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:paddingStart="16dp"
-                android:fontFamily="@font/q_regular"
-                android:background="@null"
-                android:textCursorDrawable="@null"
-                android:textSize="14sp"
-                android:hint="@string/auth_fullname"
-                android:backgroundTint="@color/white"
-                android:textColor="@color/white"
-                android:textColorHint="@color/white"/>
-
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/etMail"
+    <EditText
+            android:id="@+id/etMail1"
             android:layout_width="match_parent"
             android:layout_height="52dp"
-            app:layout_constraintTop_toBottomOf="@id/etFullname"
+            app:layout_constraintTop_toBottomOf="@id/etFullname1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginStart="24dp"
             android:layout_marginEnd="24dp"
             android:background="@drawable/bg_edittext"
             android:layout_marginTop="24dp"
-            android:textColorHint="@color/white">
+            android:paddingStart="16dp"
+            android:cursorVisible="false"
+            android:fontFamily="@font/q_regular"
+            android:textSize="14sp"
+            android:hint="@string/auth_mail"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"/>
 
-        <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etMail1"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:paddingStart="16dp"
-                android:fontFamily="@font/q_regular"
-                android:background="@null"
-                android:textCursorDrawable="@null"
-                android:textSize="14sp"
-                android:hint="@string/auth_mail"
-                android:backgroundTint="@color/white"
-                android:textColor="@color/white"
-                android:textColorHint="@color/white"/>
-
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/etPassword"
+    <EditText
+            android:id="@+id/etPassword1"
             android:layout_width="match_parent"
             android:layout_height="52dp"
-            app:layout_constraintTop_toBottomOf="@id/etMail"
+            app:layout_constraintTop_toBottomOf="@id/etMail1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginStart="24dp"
             android:layout_marginEnd="24dp"
             android:background="@drawable/bg_edittext"
             android:layout_marginTop="24dp"
-            android:textColorHint="@color/white">
-
-        <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etPassword1"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:paddingStart="16dp"
-                android:fontFamily="@font/q_regular"
-                android:background="@null"
-                android:textCursorDrawable="@null"
-                android:textSize="14sp"
-                android:hint="@string/auth_password"
-                android:backgroundTint="@color/white"
-                android:textColor="@color/white"
-                android:textColorHint="@color/white"/>
-
-
-    </com.google.android.material.textfield.TextInputLayout>
+            android:paddingStart="16dp"
+            android:cursorVisible="false"
+            android:fontFamily="@font/q_regular"
+            android:textSize="14sp"
+            android:hint="@string/auth_password"
+            android:inputType="textPassword"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"/>
 
     <CheckBox
             android:id="@+id/cbAgreement"
             android:layout_width="28dp"
             android:layout_height="28dp"
-            app:layout_constraintTop_toBottomOf="@id/etPassword"
+            app:layout_constraintTop_toBottomOf="@id/etPassword1"
             app:layout_constraintBottom_toBottomOf="@id/tvAgreement"
-            app:layout_constraintStart_toStartOf="@id/etPassword"
+            app:layout_constraintStart_toStartOf="@id/etPassword1"
             app:layout_constraintEnd_toStartOf="@id/tvAgreement"
             app:layout_constraintHorizontal_chainStyle="packed"
             android:layout_marginEnd="8dp"
@@ -114,7 +82,7 @@
             android:id="@+id/tvAgreement"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/etPassword"
+            app:layout_constraintTop_toBottomOf="@id/etPassword1"
             android:layout_marginTop="24dp"
             app:layout_constraintStart_toEndOf="@id/cbAgreement"
             app:layout_constraintEnd_toEndOf="parent"

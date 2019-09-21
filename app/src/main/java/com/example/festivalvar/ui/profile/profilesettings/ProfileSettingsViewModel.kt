@@ -67,7 +67,6 @@ class ProfileSettingsViewModel(dataManager: DataManager): BaseViewModel<IProfile
     }
 
 
-
     fun getLogout() {
 
         getNavigator()?.showLoading()

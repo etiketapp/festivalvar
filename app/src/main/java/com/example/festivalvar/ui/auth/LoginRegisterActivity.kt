@@ -38,7 +38,7 @@ class LoginRegisterActivity : BaseActivity(), ILoginRegisterNavigator {
         btnRegister.setOnClickListener {
             if (validateEdittext()) {
 
-                val etFullName = etFullname1.text
+                val etFullName = etFullname1.text.toString()
                 val etMail = etMail1.text
                 val etPassword = etPassword1.text
 
@@ -60,9 +60,10 @@ class LoginRegisterActivity : BaseActivity(), ILoginRegisterNavigator {
             val textMail = etMailLogin1?.text
             val textPassword = etPasswordLogin1?.text
 
-            if (textMail.toString().trim().isNullOrEmpty() || textPassword.toString().trim().isNullOrEmpty()) {
+            if (textMail.toString().trim().isNullOrEmpty() || textPassword.toString().trim().isNullOrEmpty() || textPassword.toString().trim().length < 6) {
                 //showPopupError("E-posta adresi veya şifre gereklidir.")
-                Toast.makeText(this, "E - posta veya şifre gereklidir.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Bilgileri kontrol ediniz", Toast.LENGTH_SHORT).show()
+
             } else {
                 val request = LoginRequest("$textMail", "$textPassword")
                 viewModel.getLogin(request)
@@ -126,7 +127,7 @@ class LoginRegisterActivity : BaseActivity(), ILoginRegisterNavigator {
         val etMail = etMail1.text
         val etPassword = etPassword1.text
 
-        if (etFullName.toString().isEmpty() || etMail.toString().isEmpty() || etPassword.toString().isEmpty() || (!cbAgreement.isChecked)) {
+        if (etFullName.toString().isEmpty() || etMail.toString().isEmpty() || etPassword.toString().isEmpty() || (!cbAgreement.isChecked) || etPassword.toString().length < 6) {
             Toast.makeText(this, "Bilgileri kontorl ediniz", Toast.LENGTH_SHORT).show()
             return false
         }
