@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import androidx.lifecycle.MutableLiveData
 import com.example.festivalvar.CoreApp.Companion.context
 import com.example.festivalvar.data.remote.model.auth.logout.Logout
+import com.example.festivalvar.data.remote.model.user.updatepassword.UserUpdatePasswordRequest
 import com.example.festivalvar.data.remote.model.user.userupdate.UserUpdate
 import com.example.festivalvar.data.remote.network.ResultWrapper
 import com.example.festivalvar.data.repository.DataManager
@@ -96,4 +97,25 @@ class ProfileSettingsViewModel(dataManager: DataManager): BaseViewModel<IProfile
         }
 
     }
+
+    fun updatePassword(passwordRequest: UserUpdatePasswordRequest, userId:Int) {
+        getNavigator()?.showLoading()
+
+        GlobalScope.launch(Dispatchers.Main) {
+
+            when (val result = withContext(Dispatchers.IO) { dataManager.putPaswwordUpdateAsync(passwordRequest,userId) }) {
+                is ResultWrapper.Success -> {
+                    getNavigator()?.hideLoading()
+                    getNavigator()?.onSucces(result.data.message)
+                    getNavigator()?.succesChangePassword(result.data.message)
+                }
+                is ResultWrapper.Error -> {
+                    getNavigator()?.hideLoading()
+                    getNavigator()?.onError(result.exception.message,result.exception.code)
+                }
+            }
+
+        }
+    }
+
 }

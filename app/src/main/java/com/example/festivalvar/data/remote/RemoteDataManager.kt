@@ -11,6 +11,8 @@ import com.example.festivalvar.data.remote.model.auth.register.RegisterRequest
 import com.example.festivalvar.data.remote.model.auth.register.RegisterResponse
 import com.example.festivalvar.data.remote.model.draws.DrawsModelResponse
 import com.example.festivalvar.data.remote.model.user.UserResponse
+import com.example.festivalvar.data.remote.model.user.updatepassword.UserUpdatePasswordRequest
+import com.example.festivalvar.data.remote.model.user.updatepassword.UserUpdatePasswordResponse
 import com.example.festivalvar.data.remote.model.user.userupdate.UserUpdateResponse
 import com.example.festivalvar.data.remote.network.RemoteDataException
 import com.example.festivalvar.data.remote.network.ResultWrapper
@@ -31,6 +33,14 @@ class RemoteDataManager(
     private val userService: IUserService,
     private val drawsService: IDrawsService
 ) : IRemoteDataManager {
+    override suspend fun putPaswwordUpdateAsync(
+        request: UserUpdatePasswordRequest,
+        userId: Int
+    ): ResultWrapper<UserUpdatePasswordResponse> = withContext(Dispatchers.Main) {
+        resultWrapper(userService.putUserUpdatePassword(request, userId))
+
+    }
+
     override suspend fun getDrawsAsync(): ResultWrapper<DrawsModelResponse> = withContext(Dispatchers.Main) {
         resultWrapper(drawsService.getDraws())
 

@@ -8,6 +8,8 @@
     <string name="auth_fullname">Ad Soyad</string>
     <string name="auth_mail">E - Posta</string>
     <string name="auth_password">Parola</string>
+    <string name="auth_password_old">Eski Parola</string>
+    <string name="auth_password_new">Yeni Parola</string>
     <string name="auth_agreement">Kullanım Koşulları\'nı ve Gizlilik Sözleşmesi\'ni okudum kabul ediyorum.</string>
     <string name="auth_forgot_password">Şifreni mi unuttun?</string>
 

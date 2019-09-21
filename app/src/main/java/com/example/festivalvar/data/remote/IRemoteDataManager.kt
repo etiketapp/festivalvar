@@ -10,6 +10,8 @@ import com.example.festivalvar.data.remote.model.auth.register.RegisterRequest
 import com.example.festivalvar.data.remote.model.auth.register.RegisterResponse
 import com.example.festivalvar.data.remote.model.draws.DrawsModelResponse
 import com.example.festivalvar.data.remote.model.user.UserResponse
+import com.example.festivalvar.data.remote.model.user.updatepassword.UserUpdatePasswordRequest
+import com.example.festivalvar.data.remote.model.user.updatepassword.UserUpdatePasswordResponse
 import com.example.festivalvar.data.remote.model.user.userupdate.UserUpdateResponse
 import com.example.festivalvar.data.remote.network.ResultWrapper
 import okhttp3.MultipartBody
@@ -31,6 +33,12 @@ interface IRemoteDataManager {
         full_name: RequestBody,
         email: RequestBody
     ): ResultWrapper<UserUpdateResponse>
+    suspend fun putPaswwordUpdateAsync(
+        request: UserUpdatePasswordRequest,
+        userId: Int
+    ): ResultWrapper<UserUpdatePasswordResponse>
+
+
 
     /** Festival**/
     suspend fun getFestivalAsync(): ResultWrapper<FestivalModelResponse>

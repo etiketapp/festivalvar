@@ -4,6 +4,7 @@ import android.net.Uri
 import android.view.View
 import com.bumptech.glide.Glide
 import com.example.festivalvar.R
+import com.example.festivalvar.data.remote.model.user.updatepassword.UserUpdatePasswordRequest
 import com.example.festivalvar.ui.base.BaseActivity
 import com.example.festivalvar.utils.PrefUtils
 import kotlinx.android.synthetic.main.activity_profile_settings.*
@@ -15,6 +16,9 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.io.File
 
 class ProfileSettingsActivity : BaseActivity(), IProfileSettingsNavigator {
+    override fun succesChangePassword(message: String) {
+    }
+
     override val layoutId: Int?
         get() = R.layout.activity_profile_settings
 
@@ -55,6 +59,10 @@ class ProfileSettingsActivity : BaseActivity(), IProfileSettingsNavigator {
         btnLogout.setOnClickListener {
             viewModel.getLogout()
         }
+
+        btnProfileSettingsChange.setOnClickListener {
+            validateEditText()
+        }
     }
 
 
@@ -81,6 +89,22 @@ class ProfileSettingsActivity : BaseActivity(), IProfileSettingsNavigator {
         val etEmail: RequestBody = RequestBody.create(MediaType.parse("text/plain"), etEmaildProfileSettings1.text.toString())
 
         viewModel.updateUser(method, null, etFullname, etEmail)
+
+    }
+
+
+    private fun validateEditText() {
+        val etPasswordOld = etPasswordProfileSettings1.text.toString()
+        val etPasswordNew = etPasswordProfileSettings1New.text.toString()
+        val etPasswordNewAgain = etPasswordAgainProfileSettings1.text.toString()
+
+        val request = UserUpdatePasswordRequest(
+            etPasswordOld,
+            etPasswordNew,
+            etPasswordNewAgain
+        )
+        viewModel.updatePassword(request, PrefUtils.getUserId())
+
 
     }
 

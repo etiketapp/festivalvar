@@ -40,6 +40,9 @@ object PrefUtils {
         instance.setValue(TOKEN, token)
     }
 
+    fun getUserId(): Int {
+        return getUser().id
+    }
 
     fun set(user: String) {
 
