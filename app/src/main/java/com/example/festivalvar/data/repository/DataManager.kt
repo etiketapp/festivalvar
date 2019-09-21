@@ -12,6 +12,9 @@ import com.example.festivalvar.data.remote.model.auth.register.RegisterRequest
 import com.example.festivalvar.data.remote.model.auth.register.RegisterResponse
 import com.example.festivalvar.data.remote.model.draws.DrawsModelResponse
 import com.example.festivalvar.data.remote.model.user.UserResponse
+import com.example.festivalvar.data.remote.model.user.commentedfestivals.CommentedFestivalModelResponse
+import com.example.festivalvar.data.remote.model.user.draws.UserDrawsResponse
+import com.example.festivalvar.data.remote.model.user.likedfestivals.LikedFestivalsModelResponse
 import com.example.festivalvar.data.remote.model.user.updatepassword.UserUpdatePasswordRequest
 import com.example.festivalvar.data.remote.model.user.updatepassword.UserUpdatePasswordResponse
 import com.example.festivalvar.data.remote.model.user.userupdate.UserUpdateResponse
@@ -23,6 +26,12 @@ class DataManager(
     private val remoteDataManager: RemoteDataManager,
     private val localDataManager: LocalDataManager
 ) : IDataManager {
+    override suspend fun getUserDrawsAsync(userId: Int): ResultWrapper<UserDrawsResponse> = remoteDataManager.getUserDrawsAsync(userId)
+
+    override suspend fun getCommentedFestivalAsync(userId: Int): ResultWrapper<CommentedFestivalModelResponse> = remoteDataManager.getCommentedFestivalAsync(userId)
+
+    override suspend fun getLikedFestivalsAsync(userId: Int): ResultWrapper<LikedFestivalsModelResponse> = remoteDataManager.getLikedFestivalsAsync(userId)
+
     override suspend fun putPaswwordUpdateAsync(
         request: UserUpdatePasswordRequest,
         userId: Int

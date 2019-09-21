@@ -37,13 +37,13 @@ class FestivalModel (
     val location: LocationModel,
     @SerializedName("start_date")
     @Expose
-    val start_date: String,
+    val start_date: String? = null,
     @SerializedName("end_date")
     @Expose
-    val end_date: String,
+    val end_date: String? = null,
     @SerializedName("category_id")
     @Expose
-    val category_id: Int,
+    val category_id: Int? = null,
     @SerializedName("distance")
     @Expose
     val distance: Double?=null,
@@ -52,12 +52,12 @@ class FestivalModel (
     val image: ImageModel?=null,
     @SerializedName("address")
     @Expose
-    val address: AddressModel,
+    val address: AddressModel? = null,
     @SerializedName("category")
     @Expose
-    val category: CategoryModel,
+    val category: CategoryModel? = null,
     @SerializedName("galleries")
     @Expose
-    val galleries: ArrayList<Galleries>
+    val galleries: ArrayList<Galleries>? = null
 
 ) : Parcelable

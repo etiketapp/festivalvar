@@ -11,6 +11,9 @@ import com.example.festivalvar.data.remote.model.auth.register.RegisterRequest
 import com.example.festivalvar.data.remote.model.auth.register.RegisterResponse
 import com.example.festivalvar.data.remote.model.draws.DrawsModelResponse
 import com.example.festivalvar.data.remote.model.user.UserResponse
+import com.example.festivalvar.data.remote.model.user.commentedfestivals.CommentedFestivalModelResponse
+import com.example.festivalvar.data.remote.model.user.draws.UserDrawsResponse
+import com.example.festivalvar.data.remote.model.user.likedfestivals.LikedFestivalsModelResponse
 import com.example.festivalvar.data.remote.model.user.updatepassword.UserUpdatePasswordRequest
 import com.example.festivalvar.data.remote.model.user.updatepassword.UserUpdatePasswordResponse
 import com.example.festivalvar.data.remote.model.user.userupdate.UserUpdateResponse
@@ -33,6 +36,20 @@ class RemoteDataManager(
     private val userService: IUserService,
     private val drawsService: IDrawsService
 ) : IRemoteDataManager {
+    override suspend fun getUserDrawsAsync(userId: Int): ResultWrapper<UserDrawsResponse> = withContext(Dispatchers.Main){
+        resultWrapper(userService.getUserDraws(userId))
+
+    }
+
+    override suspend fun getCommentedFestivalAsync(userId: Int): ResultWrapper<CommentedFestivalModelResponse> = withContext(Dispatchers.Main) {
+        resultWrapper(userService.getCommentedFestivals(userId))
+    }
+
+    override suspend fun getLikedFestivalsAsync(userId: Int): ResultWrapper<LikedFestivalsModelResponse> = withContext(Dispatchers.Main) {
+        resultWrapper(userService.getLikedFestivals(userId))
+
+    }
+
     override suspend fun putPaswwordUpdateAsync(
         request: UserUpdatePasswordRequest,
         userId: Int

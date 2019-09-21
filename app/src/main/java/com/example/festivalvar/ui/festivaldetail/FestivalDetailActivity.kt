@@ -1,10 +1,13 @@
 package com.example.festivalvar.ui.festivaldetail
 
+import android.util.Log
 import android.view.MotionEvent
 import android.view.View
+import android.widget.Toast
 import com.example.festivalvar.R
 import com.example.festivalvar.data.remote.model.FestivalModel.FestivalModel
 import com.example.festivalvar.data.remote.model.FestivalModel.Galleries
+import com.example.festivalvar.data.remote.model.user.likedfestivals.LikedFestivalsModel
 import com.example.festivalvar.ui.base.BaseActivity
 import com.example.festivalvar.ui.comments.CommentsActivity
 import com.example.festivalvar.utils.extensions.overridePendingTransitionEnter
@@ -25,8 +28,8 @@ class FestivalDetailActivity : BaseActivity(), IFestivalDetailNavigator, OnMapRe
 
     private lateinit var map: GoogleMap
 
-    private var festivalLongitute:Double = 0.0
-    private var festivalLatitute:Double = 0.0
+    private var festivalLongitute: Double = 0.0
+    private var festivalLatitute: Double = 0.0
     private var marker: Marker? = null
     var festivalLatLng: ArrayList<LatLng> = arrayListOf()
 
@@ -38,6 +41,9 @@ class FestivalDetailActivity : BaseActivity(), IFestivalDetailNavigator, OnMapRe
     var festivalData: FestivalModel? = null
 
 
+    val festivalLikedModel: LikedFestivalsModel by lazy {
+        intent?.getParcelableExtra("fromProfileToFestivalDetail") as LikedFestivalsModel
+    }
 
     override fun initNavigator() {
 
@@ -49,60 +55,94 @@ class FestivalDetailActivity : BaseActivity(), IFestivalDetailNavigator, OnMapRe
         //initSlider(dataSlider)
 
 
-        val festivalModel: FestivalModel by lazy {
-            intent?.getParcelableExtra("fromFestivalToDetail") as FestivalModel
-        }
-
-        festivalData = festivalModel
 
 
-        initSlider(festivalModel.galleries)
 
         setMap()
         mapScrollable()
 
-        tvFestivalSubtitle.text = festivalModel.sub_title
-        tvFestivalDetailContent.text = festivalModel.about
-        tvFestivalDetailDateStart.text = festivalModel.start_date
-        tvFestivalDetailDateEnd.text = festivalModel.end_date
-        btnFestivalDetail.text = festivalModel.category.title
-        val textCost = festivalModel.price
-        if (textCost.endsWith(".00")) {
+        if (intent.getIntExtra("profileFragment", -1) == 1) {
 
-            tvDetailCost.text = (textCost.substring(0, textCost.length - 3) + " TL")
+             val deneme = festivalLikedModel.festival?.title
+            Toast.makeText(this, deneme, Toast.LENGTH_SHORT).show()
+            Log.d("qqq", deneme)
+
+            tvFestivalSubtitle.text = festivalLikedModel.festival?.sub_title
+            tvFestivalDetailContent.text = festivalLikedModel.festival?.about
+            tvFestivalDetailDateStart.text = festivalLikedModel.festival?.start_date
+            tvFestivalDetailDateEnd.text = festivalLikedModel.festival?.end_date
+            val textCost = festivalLikedModel.festival?.price
+            if (textCost!!.endsWith(".00")) {
+
+                tvDetailCost.text = (textCost!!.substring(0, textCost.length - 3) + " TL")
+            } else {
+
+                tvDetailCost.text = festivalLikedModel.festival?.price
+            }
+            tvFestivalDetailReccomendationContent.text = festivalLikedModel.festival?.advice
+            festivalLikedModel.festival?.galleries?.let { initSlider(it) }
+
         } else {
+            val festivalModel: FestivalModel by lazy {
+                intent?.getParcelableExtra("fromFestivalToDetail") as FestivalModel
+            }
 
-            tvDetailCost.text = festivalModel.price
-        }
+            festivalData = festivalModel
+
+
+            festivalModel.galleries?.let { initSlider(it) }
+
+            tvFestivalSubtitle.text = festivalModel.sub_title
+            tvFestivalDetailContent.text = festivalModel.about
+            tvFestivalDetailDateStart.text = festivalModel.start_date
+            tvFestivalDetailDateEnd.text = festivalModel.end_date
+            btnFestivalDetail.text = festivalModel.category?.title
+            val textCost = festivalModel.price
+            if (textCost.endsWith(".00")) {
+
+                tvDetailCost.text = (textCost.substring(0, textCost.length - 3) + " TL")
+            } else {
+
+                tvDetailCost.text = festivalModel.price
+            }
             tvFestivalDetailReccomendationContent.text = festivalModel.advice
-
         }
 
-        override fun initListener() {
-            iv_back.setOnClickListener {
-                finish()
-            }
-
-            containerComment.setOnClickListener {
-                launchActivity<CommentsActivity> { }
-                overridePendingTransitionEnter()
-            }
-        }
-
-        private fun initSlider(data: ArrayList<Galleries>) {
-            val adapter = SliderViewPagerAdapter(applicationContext, data)
-            pagerFestivalDetail?.adapter = adapter
-            indicatorHome?.setViewPager(pagerFestivalDetail)
-
-        }
-
-
-    private fun setFestivalLocation(){
-        festivalLatitute = festivalData?.location?.latitude!!.toDouble()
-        festivalLongitute = festivalData?.location?.longitude!!.toDouble()
     }
 
-    private fun mapScrollable(){
+    override fun initListener() {
+        iv_back.setOnClickListener {
+            finish()
+        }
+
+        containerComment.setOnClickListener {
+            launchActivity<CommentsActivity> { }
+            overridePendingTransitionEnter()
+        }
+    }
+
+    private fun initSlider(data: ArrayList<Galleries>) {
+        val adapter = SliderViewPagerAdapter(applicationContext, data)
+        pagerFestivalDetail?.adapter = adapter
+        indicatorHome?.setViewPager(pagerFestivalDetail)
+
+    }
+
+
+    private fun setFestivalLocation() {
+
+        if(intent.getIntExtra("profileFragment", -1) == 1){
+
+            festivalLatitute = festivalLikedModel.festival?.location?.latitude!!.toDouble()
+            festivalLongitute = festivalLikedModel.festival?.location?.longitude!!.toDouble()
+        } else {
+
+            festivalLatitute = festivalData?.location?.latitude!!.toDouble()
+            festivalLongitute = festivalData?.location?.longitude!!.toDouble()
+        }
+    }
+
+    private fun mapScrollable() {
         //make scroll easily on map
 
         transparent_festival_detail_image.setOnTouchListener(View.OnTouchListener { v, event ->
@@ -143,7 +183,8 @@ class FestivalDetailActivity : BaseActivity(), IFestivalDetailNavigator, OnMapRe
         map.setOnMapLoadedCallback {
 
             setFestivalLocation()
-            val fesitvalLocation = LatLng(festivalData?.location?.latitude!!.toDouble(), festivalData?.location?.longitude!!.toDouble())
+            val fesitvalLocation =
+                LatLng(festivalLatitute, festivalLongitute)
             festivalLatLng.add(fesitvalLocation)
 
 
@@ -168,9 +209,6 @@ class FestivalDetailActivity : BaseActivity(), IFestivalDetailNavigator, OnMapRe
 
         }
     }
-
-
-
 
 
 }

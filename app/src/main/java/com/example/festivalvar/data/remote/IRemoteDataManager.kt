@@ -10,6 +10,9 @@ import com.example.festivalvar.data.remote.model.auth.register.RegisterRequest
 import com.example.festivalvar.data.remote.model.auth.register.RegisterResponse
 import com.example.festivalvar.data.remote.model.draws.DrawsModelResponse
 import com.example.festivalvar.data.remote.model.user.UserResponse
+import com.example.festivalvar.data.remote.model.user.commentedfestivals.CommentedFestivalModelResponse
+import com.example.festivalvar.data.remote.model.user.draws.UserDrawsResponse
+import com.example.festivalvar.data.remote.model.user.likedfestivals.LikedFestivalsModelResponse
 import com.example.festivalvar.data.remote.model.user.updatepassword.UserUpdatePasswordRequest
 import com.example.festivalvar.data.remote.model.user.updatepassword.UserUpdatePasswordResponse
 import com.example.festivalvar.data.remote.model.user.userupdate.UserUpdateResponse
@@ -37,6 +40,12 @@ interface IRemoteDataManager {
         request: UserUpdatePasswordRequest,
         userId: Int
     ): ResultWrapper<UserUpdatePasswordResponse>
+
+    suspend fun getLikedFestivalsAsync(userId: Int): ResultWrapper<LikedFestivalsModelResponse>
+    suspend fun getCommentedFestivalAsync(userId: Int): ResultWrapper<CommentedFestivalModelResponse>
+    suspend fun getUserDrawsAsync(userId: Int): ResultWrapper<UserDrawsResponse>
+
+
 
 
 

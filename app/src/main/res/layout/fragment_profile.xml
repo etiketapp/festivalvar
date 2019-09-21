@@ -114,7 +114,20 @@
                         android:layout_weight="1"
                         app:drawableGravity="top"
                         app:selectedTextColor="@color/main_purple"
-                        app:text="Beğendiklerim"
+                        app:text="Beğeniler"
+                        android:fontFamily="@font/q_medium"
+                        app:textSize="12sp"
+                        app:textColor="@color/main_purple"/>
+
+
+                <com.addisonelliott.segmentedbutton.SegmentedButton
+                        android:id="@+id/btnComments"
+                        android:layout_width="0dp"
+                        android:layout_height="52dp"
+                        android:layout_weight="1"
+                        app:drawableGravity="top"
+                        app:selectedTextColor="@color/main_purple"
+                        app:text="Yorumlar"
                         android:fontFamily="@font/q_medium"
                         app:textSize="12sp"
                         app:textColor="@color/main_purple"/>
@@ -134,27 +147,72 @@
             </com.addisonelliott.segmentedbutton.SegmentedButtonGroup>
 
             <LinearLayout
-                    android:id="@+id/linear"
+                    android:id="@+id/linearLikes"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
+                    android:visibility="gone"
                     app:layout_constraintTop_toBottomOf="@id/segmentedButtonGroupProfile">
 
-                <include
-                        android:id="@+id/item1"
-                        layout="@layout/row_main_festival_item"></include>
+                <androidx.recyclerview.widget.RecyclerView
+                        android:nestedScrollingEnabled="false"
+                        android:id="@+id/rvFestivalLike"
+                        android:orientation="vertical"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        tools:listitem="@layout/row_main_festival_item"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="24dp"/>
 
-                <include android:id="@+id/item2"
 
-                         layout="@layout/row_main_festival_item"></include>
-
-                <include android:id="@+id/item3"
-                         layout="@layout/row_main_festival_item"></include>
-
-                <include android:id="@+id/item4"
-                         layout="@layout/row_main_festival_item"></include>
 
             </LinearLayout>
+
+            <LinearLayout
+                    android:id="@+id/linearComments"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone"
+                    app:layout_constraintTop_toBottomOf="@id/segmentedButtonGroupProfile">
+
+                <androidx.recyclerview.widget.RecyclerView
+                        android:nestedScrollingEnabled="false"
+                        android:id="@+id/rvFestivalComments"
+                        android:orientation="vertical"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        tools:listitem="@layout/row_main_festival_item"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="24dp"/>
+
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                    android:id="@+id/linearDraws"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone"
+                    app:layout_constraintTop_toBottomOf="@id/segmentedButtonGroupProfile">
+
+                <androidx.recyclerview.widget.RecyclerView
+                        android:nestedScrollingEnabled="false"
+                        android:id="@+id/rvFestivalDraws"
+                        android:orientation="vertical"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        tools:listitem="@layout/row_main_festival_item"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="24dp"/>
+
+
+
+            </LinearLayout>
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 
