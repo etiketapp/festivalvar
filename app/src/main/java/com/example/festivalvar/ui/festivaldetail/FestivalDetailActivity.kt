@@ -1,9 +1,7 @@
 package com.example.festivalvar.ui.festivaldetail
 
-import android.util.Log
 import android.view.MotionEvent
 import android.view.View
-import android.widget.Toast
 import com.example.festivalvar.R
 import com.example.festivalvar.data.remote.model.FestivalModel.FestivalModel
 import com.example.festivalvar.data.remote.model.FestivalModel.Galleries
@@ -141,9 +139,12 @@ class FestivalDetailActivity : BaseActivity(), IFestivalDetailNavigator, OnMapRe
         }
 
         containerComment.setOnClickListener {
-            launchActivity<CommentsActivity> { }
+            launchActivity<CommentsActivity> {
+
+            }
             overridePendingTransitionEnter()
         }
+
     }
 
     private fun initSlider(data: ArrayList<Galleries>) {
@@ -204,7 +205,6 @@ class FestivalDetailActivity : BaseActivity(), IFestivalDetailNavigator, OnMapRe
         })
 
     }
-
 
     private fun setMap() {
         val mapFragment = supportFragmentManager.findFragmentById(R.id.mapFestivalDetail) as SupportMapFragment?

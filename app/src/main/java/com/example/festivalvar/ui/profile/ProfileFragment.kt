@@ -20,6 +20,7 @@ import com.example.festivalvar.ui.profile.viewholders.FestivalDrawsClickListener
 import com.example.festivalvar.ui.profile.viewholders.FestivalLikeClickListener
 import com.example.festivalvar.utils.PrefUtils
 import com.mobillium.birebirdiyet.utils.extensions.launchActivity
+import com.mobillium.birebirdiyet.utils.extensions.load
 import kotlinx.android.synthetic.main.fragment_profile.*
 import kotlinx.android.synthetic.main.toolbar_layout.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -50,6 +51,7 @@ class ProfileFragment : BaseFragment(), IProfileNavigator, FestivalLikeClickList
         viewModel.getFestivalLike(PrefUtils.getUserId())
         viewModel.getFestivalComment(PrefUtils.getUserId())
         viewModel.getUserDraws(PrefUtils.getUserId())
+        PrefUtils.getUser().image?.url?.let { ivProfile.load(it) }
 
         linearLikes.visibility = View.VISIBLE
 

@@ -27,6 +27,11 @@ class FestivalDrawsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView
         tvFestivalDistance.visibility = View.GONE
         tvFestivalDate.visibility = View.GONE
         btnCategory.visibility = View.GONE
+        ivLikeBackground.visibility = View.GONE
+        ivLike.visibility = View.GONE
+        tvFesivalLocation.visibility = View.GONE
+        btnCategory.visibility = View.GONE
+
 
 
         itemView.setOnClickListener {

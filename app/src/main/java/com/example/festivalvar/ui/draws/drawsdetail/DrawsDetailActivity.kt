@@ -11,6 +11,8 @@ import com.example.festivalvar.ui.base.BaseActivity
 import com.example.festivalvar.ui.festivaldetail.SliderViewPagerAdapter
 import kotlinx.android.synthetic.main.activity_draws_detail.*
 import kotlinx.android.synthetic.main.activity_festival_detail.*
+import kotlinx.android.synthetic.main.row_main_festival_item.*
+import kotlinx.android.synthetic.main.row_main_festival_item.view.*
 import kotlinx.android.synthetic.main.toolbar_layout.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 

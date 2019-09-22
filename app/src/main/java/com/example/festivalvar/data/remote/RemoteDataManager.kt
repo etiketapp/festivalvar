@@ -10,6 +10,7 @@ import com.example.festivalvar.data.remote.model.auth.logout.LogoutResponse
 import com.example.festivalvar.data.remote.model.auth.register.RegisterRequest
 import com.example.festivalvar.data.remote.model.auth.register.RegisterResponse
 import com.example.festivalvar.data.remote.model.categories.CategoriesResponse
+import com.example.festivalvar.data.remote.model.comments.FestivalCommentsUserResponse
 import com.example.festivalvar.data.remote.model.draws.DrawsModelResponse
 import com.example.festivalvar.data.remote.model.user.UserResponse
 import com.example.festivalvar.data.remote.model.user.commentedfestivals.CommentedFestivalModelResponse
@@ -39,6 +40,11 @@ class RemoteDataManager(
     private val drawsService: IDrawsService,
     private val categoryService: ICategoryService
 ) : IRemoteDataManager {
+    override suspend fun getFestivalCommentUserAsync(festivalId: Int): ResultWrapper<FestivalCommentsUserResponse> = withContext(Dispatchers.Main){
+        resultWrapper(festivalService.getUserComments(festivalId))
+
+    }
+
     override suspend fun getCategoryAsync(): ResultWrapper<CategoriesResponse> = withContext(Dispatchers.Main) {
         resultWrapper(categoryService.getCategroies())
 

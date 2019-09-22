@@ -6,6 +6,7 @@ import com.example.festivalvar.ui.draws.DrawFragmentViewModel
 import com.example.festivalvar.ui.draws.drawsdetail.DrawsDetailViewModel
 import com.example.festivalvar.ui.festivaldetail.FestivalDetailViewModel
 import com.example.festivalvar.ui.home.HomeViewModel
+import com.example.festivalvar.ui.home.festivalcomments.FestivalCommentsViewModel
 import com.example.festivalvar.ui.main.MainViewModel
 import com.example.festivalvar.ui.messages.MessagesFragmentViewModel
 import com.example.festivalvar.ui.notifications.NotificationsViewModel
@@ -28,6 +29,7 @@ val viewModelModule = module {
     viewModel { ProfileSettingsViewModel(get()) }
     viewModel { DrawFragmentViewModel(get()) }
     viewModel { DrawsDetailViewModel(get()) }
+    viewModel { FestivalCommentsViewModel(get()) }
 
 
 }

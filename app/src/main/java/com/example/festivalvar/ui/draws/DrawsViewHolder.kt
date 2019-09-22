@@ -20,6 +20,14 @@ class DrawsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         tvFestivalTitle.text = model.title
         tvFestivalSubtitle.text = model.sub_title
 
+        ivLikeBackground.visibility = View.GONE
+        ivLike.visibility = View.GONE
+        tvFesivalLocation.visibility = View.GONE
+        tvFestivalCost.visibility = View.GONE
+        btnCategory.visibility = View.GONE
+
+
+
         itemView.setOnClickListener {
             listener.onClick(model)
         }

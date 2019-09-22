@@ -51,7 +51,7 @@
                         app:layout_constraintDimensionRatio="h, 1:0.66"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        android:background="@drawable/bg_header"
+                        android:background="@color/grey"
                         app:layout_constraintEnd_toEndOf="parent"/>
 
 
