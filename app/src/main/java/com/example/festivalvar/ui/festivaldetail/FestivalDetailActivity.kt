@@ -7,6 +7,7 @@ import android.widget.Toast
 import com.example.festivalvar.R
 import com.example.festivalvar.data.remote.model.FestivalModel.FestivalModel
 import com.example.festivalvar.data.remote.model.FestivalModel.Galleries
+import com.example.festivalvar.data.remote.model.user.commentedfestivals.CommentedFestivalModel
 import com.example.festivalvar.data.remote.model.user.likedfestivals.LikedFestivalsModel
 import com.example.festivalvar.ui.base.BaseActivity
 import com.example.festivalvar.ui.comments.CommentsActivity
@@ -45,6 +46,11 @@ class FestivalDetailActivity : BaseActivity(), IFestivalDetailNavigator, OnMapRe
         intent?.getParcelableExtra("fromProfileToFestivalDetail") as LikedFestivalsModel
     }
 
+
+    val festivalCommentedModel: CommentedFestivalModel by lazy {
+        intent?.getParcelableExtra("fromProfileToFestivalDetail") as CommentedFestivalModel
+    }
+
     override fun initNavigator() {
 
         viewModel.setNavigator(this)
@@ -52,26 +58,23 @@ class FestivalDetailActivity : BaseActivity(), IFestivalDetailNavigator, OnMapRe
 
     override fun initUI() {
         iv_back.visibility = View.VISIBLE
+        ivToolbarLogo.visibility = View.VISIBLE
         //initSlider(dataSlider)
-
-
-
-
 
         setMap()
         mapScrollable()
 
+        /** Likelanan festivallere bakmak için **/
         if (intent.getIntExtra("profileFragment", -1) == 1) {
-
-             val deneme = festivalLikedModel.festival?.title
-            Toast.makeText(this, deneme, Toast.LENGTH_SHORT).show()
-            Log.d("qqq", deneme)
 
             tvFestivalSubtitle.text = festivalLikedModel.festival?.sub_title
             tvFestivalDetailContent.text = festivalLikedModel.festival?.about
             tvFestivalDetailDateStart.text = festivalLikedModel.festival?.start_date
             tvFestivalDetailDateEnd.text = festivalLikedModel.festival?.end_date
             val textCost = festivalLikedModel.festival?.price
+            tvDetailLikeCount.text = festivalLikedModel.festival?.likes_count.toString()
+            tvDetailCommentCount.text = festivalLikedModel.festival?.comments_count.toString()
+
             if (textCost!!.endsWith(".00")) {
 
                 tvDetailCost.text = (textCost!!.substring(0, textCost.length - 3) + " TL")
@@ -82,6 +85,26 @@ class FestivalDetailActivity : BaseActivity(), IFestivalDetailNavigator, OnMapRe
             tvFestivalDetailReccomendationContent.text = festivalLikedModel.festival?.advice
             festivalLikedModel.festival?.galleries?.let { initSlider(it) }
 
+            /** Yorum atılan festivallere bakmak için **/
+        } else if(intent.getIntExtra("profileFragment", -1) == 2){
+
+            tvFestivalSubtitle.text = festivalCommentedModel.festival?.sub_title
+            tvFestivalDetailContent.text = festivalCommentedModel.festival?.about
+            tvFestivalDetailDateStart.text = festivalCommentedModel.festival?.start_date
+            tvFestivalDetailDateEnd.text = festivalCommentedModel.festival?.end_date
+            val textCost = festivalCommentedModel.festival?.price
+            tvDetailLikeCount.text = festivalCommentedModel.festival?.likes_count.toString()
+            tvDetailCommentCount.text = festivalCommentedModel.festival?.comments_count.toString()
+
+            if (textCost!!.endsWith(".00")) {
+
+                tvDetailCost.text = (textCost!!.substring(0, textCost.length - 3) + " TL")
+            } else {
+
+                tvDetailCost.text = festivalCommentedModel.festival?.price
+            }
+            tvFestivalDetailReccomendationContent.text = festivalCommentedModel.festival?.advice
+            festivalCommentedModel.festival?.galleries?.let { initSlider(it) }
         } else {
             val festivalModel: FestivalModel by lazy {
                 intent?.getParcelableExtra("fromFestivalToDetail") as FestivalModel
@@ -98,6 +121,8 @@ class FestivalDetailActivity : BaseActivity(), IFestivalDetailNavigator, OnMapRe
             tvFestivalDetailDateEnd.text = festivalModel.end_date
             btnFestivalDetail.text = festivalModel.category?.title
             val textCost = festivalModel.price
+            tvDetailLikeCount.text = festivalModel.likes_count.toString()
+            tvDetailCommentCount.text = festivalModel.comments_count.toString()
             if (textCost.endsWith(".00")) {
 
                 tvDetailCost.text = (textCost.substring(0, textCost.length - 3) + " TL")
@@ -131,10 +156,18 @@ class FestivalDetailActivity : BaseActivity(), IFestivalDetailNavigator, OnMapRe
 
     private fun setFestivalLocation() {
 
+        /** Likelanan festivallerin lokasyonu**/
         if(intent.getIntExtra("profileFragment", -1) == 1){
 
             festivalLatitute = festivalLikedModel.festival?.location?.latitude!!.toDouble()
             festivalLongitute = festivalLikedModel.festival?.location?.longitude!!.toDouble()
+
+            /** YOrumlanan festivallerin lokasyonu**/
+        } else if(intent.getIntExtra("profileFragment", -1) == 2){
+
+            festivalLatitute = festivalCommentedModel.festival?.location?.latitude!!.toDouble()
+            festivalLongitute = festivalCommentedModel.festival?.location?.longitude!!.toDouble()
+
         } else {
 
             festivalLatitute = festivalData?.location?.latitude!!.toDouble()

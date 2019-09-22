@@ -41,7 +41,7 @@ object PrefUtils {
     }
 
     fun getUserId(): Int {
-        return getUser().id
+        return getUser().id!!
     }
 
     fun set(user: String) {

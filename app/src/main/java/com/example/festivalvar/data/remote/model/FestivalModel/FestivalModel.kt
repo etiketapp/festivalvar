@@ -44,6 +44,15 @@ class FestivalModel (
     @SerializedName("category_id")
     @Expose
     val category_id: Int? = null,
+    @SerializedName("likes_count")
+    @Expose
+    val likes_count: Int? = null,
+    @SerializedName("comments_count")
+    @Expose
+    val comments_count: Int? = null,
+    @SerializedName("is_liked")
+    @Expose
+    val is_liked: Boolean? = null,
     @SerializedName("distance")
     @Expose
     val distance: Double?=null,

@@ -115,13 +115,12 @@
 
             <ImageView
                     android:id="@+id/ivLike"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="14dp"
+                    android:layout_height="13dp"
                     app:layout_constraintTop_toTopOf="@id/ivLikeBackground"
                     app:layout_constraintStart_toStartOf="@id/ivLikeBackground"
                     app:layout_constraintEnd_toEndOf="@id/ivLikeBackground"
-                    app:layout_constraintBottom_toBottomOf="@id/ivLikeBackground"
-                    android:background="@drawable/ic_heart_full"/>
+                    app:layout_constraintBottom_toBottomOf="@id/ivLikeBackground"/>
 
             <TextView
                     android:id="@+id/tvFesivalLocation"

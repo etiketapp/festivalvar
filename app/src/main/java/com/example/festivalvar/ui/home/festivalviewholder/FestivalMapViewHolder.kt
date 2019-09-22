@@ -9,7 +9,7 @@ import kotlinx.android.synthetic.main.row_festival_map_item.view.*
 class FestivalMapViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     fun bind1(model: FestivalModel, listener: FestivalMapClickListener) = with(itemView) {
 
-        //ivFestivalMapItem.load(model.image?.url!!)
+        model.galleries?.get(0)?.image?.url?.let { ivFestivalMapItem.load(it) }
         tvMapItemFestivalTitle.text = model.title
         tvMapItemFestivalDate.text = model.start_date
         tvMapItemFestivalLocation.text = model.place

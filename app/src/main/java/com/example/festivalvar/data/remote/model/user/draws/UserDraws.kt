@@ -1,10 +1,13 @@
 package com.example.festivalvar.data.remote.model.user.draws
 
+import android.os.Parcelable
 import com.example.festivalvar.data.remote.model.draws.DrawsModel
 import com.example.festivalvar.data.remote.model.user.User
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 class UserDraws (
     @SerializedName("id")
     @Expose
@@ -27,5 +30,5 @@ class UserDraws (
     @SerializedName("draw")
     @Expose
     val draw: DrawsModel? = null
-)
+) : Parcelable
 

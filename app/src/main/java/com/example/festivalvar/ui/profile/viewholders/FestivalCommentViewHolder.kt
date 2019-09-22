@@ -2,6 +2,7 @@ package com.example.festivalvar.ui.profile.viewholders
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
+import com.example.festivalvar.R
 import com.example.festivalvar.data.remote.model.user.commentedfestivals.CommentedFestivalModel
 import com.example.festivalvar.data.remote.model.user.likedfestivals.LikedFestivalsModel
 import com.mobillium.birebirdiyet.utils.extensions.load
@@ -18,6 +19,12 @@ class FestivalCommentViewHolder(itemView: View) : RecyclerView.ViewHolder(itemVi
         tvFesivalLocation.text = model.festival.place
         if(model.festival.distance != null)tvFestivalDistance.text = model.festival.distance.toString()
         tvFestivalDate.text = model.festival.start_date
+        if(model.festival.is_liked!!){
+            ivLike.load(R.drawable.ic_heart_full)
+        } else {
+            ivLike.load(R.drawable.ic_heart_empty)
+
+        }
         //btnCategory.text = model.festival.category.title
 
 

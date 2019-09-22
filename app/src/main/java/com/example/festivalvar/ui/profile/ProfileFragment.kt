@@ -8,6 +8,7 @@ import com.example.festivalvar.data.remote.model.user.commentedfestivals.Comment
 import com.example.festivalvar.data.remote.model.user.draws.UserDraws
 import com.example.festivalvar.data.remote.model.user.likedfestivals.LikedFestivalsModel
 import com.example.festivalvar.ui.base.BaseFragment
+import com.example.festivalvar.ui.draws.drawsdetail.DrawsDetailActivity
 import com.example.festivalvar.ui.festivaldetail.FestivalDetailActivity
 import com.example.festivalvar.ui.home.festivaladapter.AdapterFestival
 import com.example.festivalvar.ui.profile.adapters.FestivalCommentAdapter
@@ -24,21 +25,6 @@ import kotlinx.android.synthetic.main.toolbar_layout.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ProfileFragment : BaseFragment(), IProfileNavigator, FestivalLikeClickListener, FestivalCommentsClickListener, FestivalDrawsClickListener {
-    override fun onClick(model: UserDraws) {
-
-    }
-
-    override fun onClick(model: CommentedFestivalModel) {
-
-    }
-
-    override fun onClick(model: LikedFestivalsModel) {
-        activity!!.launchActivity<FestivalDetailActivity> {
-            this.putExtra("fromProfileToFestivalDetail", model)
-            this.putExtra("profileFragment", 1)
-        }
-
-    }
 
     override val layoutId: Int
         get() = R.layout.fragment_profile
@@ -58,9 +44,8 @@ class ProfileFragment : BaseFragment(), IProfileNavigator, FestivalLikeClickList
 
         observeViewModel()
 
-        tvToolbarTitle.visibility = View.VISIBLE
+        ivToolbarLogo.visibility = View.VISIBLE
         iv_list.visibility = View.GONE
-        tvToolbarTitle.text = PrefUtils.getUser().full_name
 
         viewModel.getFestivalLike(PrefUtils.getUserId())
         viewModel.getFestivalComment(PrefUtils.getUserId())
@@ -142,6 +127,31 @@ class ProfileFragment : BaseFragment(), IProfileNavigator, FestivalLikeClickList
         viewModel.userDrawsDataList.observe(this, Observer {
             initUSerDraws(it)
         })
+    }
+
+    override fun onClick(model: UserDraws) {
+        activity!!.launchActivity<DrawsDetailActivity> {
+            this.putExtra("fromProfileFragmentToDrawsDetail", model)
+            this.putExtra("profileFragment", 1)
+        }
+
+    }
+
+
+    override fun onClick(model: CommentedFestivalModel) {
+        activity!!.launchActivity<FestivalDetailActivity> {
+            this.putExtra("fromProfileToFestivalDetail", model)
+            this.putExtra("profileFragment", 2)
+        }
+
+    }
+
+    override fun onClick(model: LikedFestivalsModel) {
+        activity!!.launchActivity<FestivalDetailActivity> {
+            this.putExtra("fromProfileToFestivalDetail", model)
+            this.putExtra("profileFragment", 1)
+        }
+
     }
 
 }
