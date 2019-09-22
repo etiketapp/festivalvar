@@ -2,6 +2,7 @@ package com.example.festivalvar.ui.home
 
 import androidx.lifecycle.MutableLiveData
 import com.example.festivalvar.data.remote.model.FestivalModel.FestivalModel
+import com.example.festivalvar.data.remote.model.categories.Categories
 import com.example.festivalvar.data.remote.network.ResultWrapper
 import com.example.festivalvar.data.repository.DataManager
 import com.example.festivalvar.ui.base.BaseViewModel
@@ -14,6 +15,7 @@ class HomeViewModel(dataManager: DataManager): BaseViewModel<IHomeNavigator>(dat
 
 
     val festivalDataList: MutableLiveData<ArrayList<FestivalModel>> = MutableLiveData()
+    val categoryDataList: MutableLiveData<ArrayList<Categories>> = MutableLiveData()
 
     fun getFestivalList() {
         getNavigator()?.showLoading()
@@ -35,4 +37,26 @@ class HomeViewModel(dataManager: DataManager): BaseViewModel<IHomeNavigator>(dat
             }
         }
     }
+
+    fun getCategoryList() {
+        getNavigator()?.showLoading()
+        GlobalScope.launch(Dispatchers.Main) {
+            when (val result = withContext(Dispatchers.IO) { dataManager.getCategoryAsync() }) {
+                is ResultWrapper.Success -> {
+                    getNavigator()?.hideLoading()
+                    categoryDataList.value = result.data.data
+
+                }
+                is ResultWrapper.Error -> {
+                    getNavigator()?.hideLoading()
+                    getNavigator()?.onError(
+                        result.exception.message,
+                        result.exception.code
+                    )
+
+                }
+            }
+        }
+    }
+
 }

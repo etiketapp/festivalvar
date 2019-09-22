@@ -3,6 +3,7 @@ package com.example.festivalvar.di
 import com.example.festivalvar.data.remote.service.IAuthService
 import com.example.festivalvar.data.remote.service.IFestivalService
 import com.example.festivalvar.data.remote.service.ServiceClient.createWebService
+import com.example.festivalvar.data.remote.service.categories.ICategoryService
 import com.example.festivalvar.data.remote.service.draws.IDrawsService
 import com.example.festivalvar.data.remote.service.user.IUserService
 import org.koin.dsl.module.module
@@ -12,4 +13,5 @@ val remoteModule = module {
    factory { createWebService<IFestivalService>() }
    factory { createWebService<IUserService>() }
    factory { createWebService<IDrawsService>() }
+   factory { createWebService<ICategoryService>() }
 }

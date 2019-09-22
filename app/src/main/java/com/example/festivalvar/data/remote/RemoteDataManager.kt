@@ -9,6 +9,7 @@ import com.example.festivalvar.data.remote.model.auth.login.LoginResponse
 import com.example.festivalvar.data.remote.model.auth.logout.LogoutResponse
 import com.example.festivalvar.data.remote.model.auth.register.RegisterRequest
 import com.example.festivalvar.data.remote.model.auth.register.RegisterResponse
+import com.example.festivalvar.data.remote.model.categories.CategoriesResponse
 import com.example.festivalvar.data.remote.model.draws.DrawsModelResponse
 import com.example.festivalvar.data.remote.model.user.UserResponse
 import com.example.festivalvar.data.remote.model.user.commentedfestivals.CommentedFestivalModelResponse
@@ -21,6 +22,7 @@ import com.example.festivalvar.data.remote.network.RemoteDataException
 import com.example.festivalvar.data.remote.network.ResultWrapper
 import com.example.festivalvar.data.remote.service.IAuthService
 import com.example.festivalvar.data.remote.service.IFestivalService
+import com.example.festivalvar.data.remote.service.categories.ICategoryService
 import com.example.festivalvar.data.remote.service.draws.IDrawsService
 import com.example.festivalvar.data.remote.service.user.IUserService
 import kotlinx.coroutines.Deferred
@@ -34,8 +36,14 @@ class RemoteDataManager(
     private val authService: IAuthService,
     private val festivalService: IFestivalService,
     private val userService: IUserService,
-    private val drawsService: IDrawsService
+    private val drawsService: IDrawsService,
+    private val categoryService: ICategoryService
 ) : IRemoteDataManager {
+    override suspend fun getCategoryAsync(): ResultWrapper<CategoriesResponse> = withContext(Dispatchers.Main) {
+        resultWrapper(categoryService.getCategroies())
+
+    }
+
     override suspend fun getUserDrawsAsync(userId: Int): ResultWrapper<UserDrawsResponse> = withContext(Dispatchers.Main){
         resultWrapper(userService.getUserDraws(userId))
 

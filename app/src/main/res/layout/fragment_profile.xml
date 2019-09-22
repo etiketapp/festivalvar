@@ -12,31 +12,10 @@
             android:layout_width="match_parent"
             android:layout_height="200dp">
 
-        <!--
-                <com.google.android.material.appbar.AppBarLayout
-                        android:id="@+id/appBar"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:elevation="0dp"
-                        android:theme="@style/AppTheme.AppBarOverlay">
-
-                    <include layout="@layout/toolbar_layout"
-                             android:layout_height="?attr/actionBarSize"
-                             android:layout_width="match_parent"
-                             app:layout_constraintEnd_toEndOf="parent"
-                             app:layout_constraintStart_toStartOf="parent"
-                             app:layout_constraintTop_toTopOf="parent"/>
-
-                </com.google.android.material.appbar.AppBarLayout>
-        -->
-
         <com.google.android.material.appbar.CollapsingToolbarLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/bg_header"
+                android:background="@drawable/bg_splash_purple"
                 android:fitsSystemWindows="true"
                 app:layout_scrollFlags="exitUntilCollapsed|scroll|snap">
 
@@ -47,15 +26,6 @@
                     android:layout_marginTop="24dp"
                     android:layout_gravity="center"
                     android:src="@drawable/ic_profile"/>
-<!--
-            <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/ivSettings"
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
-                    android:layout_marginTop="64dp"
-                    android:layout_marginEnd="24dp"
-                    android:src="@color/white"
-                    android:layout_gravity="end"/>-->
 
             <ImageView
                     android:id="@+id/ivSettings"

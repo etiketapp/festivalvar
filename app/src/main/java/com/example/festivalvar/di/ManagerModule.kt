@@ -6,7 +6,7 @@ import com.example.festivalvar.data.repository.DataManager
 import org.koin.dsl.module.module
 
 val managerModule = module {
-    single { RemoteDataManager(get(), get(), get(), get()) }
+    single { RemoteDataManager(get(), get(), get(), get(), get()) }
     single { LocalDataManager() }
     single { DataManager(get(), get()) }
 }

@@ -1,6 +1,7 @@
 package com.example.festivalvar.data.remote.model.categories
 
 import android.os.Parcelable
+import com.example.festivalvar.data.remote.model.image.ImageModel
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
@@ -22,5 +23,8 @@ class Categories (
     val created_at: String,
     @SerializedName("festivals")
     @Expose
-    val festivals: ArrayList<Festivals>
+    val festivals: ArrayList<Festivals>? = null,
+    @SerializedName("image")
+    @Expose
+    val image: ImageModel
 ) : Parcelable

@@ -8,6 +8,7 @@ import com.example.festivalvar.data.remote.model.auth.login.LoginResponse
 import com.example.festivalvar.data.remote.model.auth.logout.LogoutResponse
 import com.example.festivalvar.data.remote.model.auth.register.RegisterRequest
 import com.example.festivalvar.data.remote.model.auth.register.RegisterResponse
+import com.example.festivalvar.data.remote.model.categories.CategoriesResponse
 import com.example.festivalvar.data.remote.model.draws.DrawsModelResponse
 import com.example.festivalvar.data.remote.model.user.UserResponse
 import com.example.festivalvar.data.remote.model.user.commentedfestivals.CommentedFestivalModelResponse
@@ -24,18 +25,21 @@ interface IRemoteDataManager {
 
     /** Auth **/
     suspend fun postRegisterAsync(request: RegisterRequest): ResultWrapper<RegisterResponse>
+
     suspend fun postLoginAsync(request: LoginRequest): ResultWrapper<LoginResponse>
     suspend fun postForgotPasswordAsync(request: ForgotPasswordRequest): ResultWrapper<ForgotPasswordResponse>
     suspend fun postLogoutAsync(): ResultWrapper<LogoutResponse>
 
     /** User **/
     suspend fun getUserMeAsync(): ResultWrapper<UserResponse>
+
     suspend fun updateProfileAsync(
         _method: RequestBody,
         image: MultipartBody.Part?,
         full_name: RequestBody,
         email: RequestBody
     ): ResultWrapper<UserUpdateResponse>
+
     suspend fun putPaswwordUpdateAsync(
         request: UserUpdatePasswordRequest,
         userId: Int
@@ -45,8 +49,8 @@ interface IRemoteDataManager {
     suspend fun getCommentedFestivalAsync(userId: Int): ResultWrapper<CommentedFestivalModelResponse>
     suspend fun getUserDrawsAsync(userId: Int): ResultWrapper<UserDrawsResponse>
 
-
-
+    /** Categories **/
+    suspend fun getCategoryAsync(): ResultWrapper<CategoriesResponse>
 
 
     /** Festival**/
@@ -54,7 +58,6 @@ interface IRemoteDataManager {
 
     /** Draws **/
     suspend fun getDrawsAsync(): ResultWrapper<DrawsModelResponse>
-
 
 
 }
