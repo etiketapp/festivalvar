@@ -25,4 +25,5 @@ class LikesModel (
     @SerializedName("festival_id")
     @Expose
     val festival_id: Int? = null
+
 ) : Parcelable

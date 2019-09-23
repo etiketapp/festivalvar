@@ -9,6 +9,7 @@ import com.example.festivalvar.data.remote.model.user.commentedfestivals.Comment
 import com.example.festivalvar.data.remote.model.user.likedfestivals.LikedFestivalsModel
 import com.example.festivalvar.ui.base.BaseActivity
 import com.example.festivalvar.ui.comments.CommentsActivity
+import com.example.festivalvar.ui.home.festivallikes.FestivalLikesActivity
 import com.example.festivalvar.utils.extensions.overridePendingTransitionEnter
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -142,6 +143,11 @@ class FestivalDetailActivity : BaseActivity(), IFestivalDetailNavigator, OnMapRe
             launchActivity<CommentsActivity> {
 
             }
+            overridePendingTransitionEnter()
+        }
+
+        cvLike.setOnClickListener {
+            launchActivity<FestivalLikesActivity> {  }
             overridePendingTransitionEnter()
         }
 

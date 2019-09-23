@@ -11,6 +11,7 @@ import com.example.festivalvar.data.remote.model.auth.register.RegisterResponse
 import com.example.festivalvar.data.remote.model.categories.CategoriesResponse
 import com.example.festivalvar.data.remote.model.comments.FestivalCommentsUserResponse
 import com.example.festivalvar.data.remote.model.draws.DrawsModelResponse
+import com.example.festivalvar.data.remote.model.festivallikes.FestivalLikesModelResponse
 import com.example.festivalvar.data.remote.model.user.UserResponse
 import com.example.festivalvar.data.remote.model.user.commentedfestivals.CommentedFestivalModelResponse
 import com.example.festivalvar.data.remote.model.user.draws.UserDrawsResponse
@@ -57,6 +58,7 @@ interface IRemoteDataManager {
     /** Festival**/
     suspend fun getFestivalAsync(): ResultWrapper<FestivalModelResponse>
     suspend fun getFestivalCommentUserAsync(festivalId: Int): ResultWrapper<FestivalCommentsUserResponse>
+    suspend fun getFestivalLikeUserAsync(festivalId: Int): ResultWrapper<FestivalLikesModelResponse>
 
     /** Draws **/
     suspend fun getDrawsAsync(): ResultWrapper<DrawsModelResponse>
