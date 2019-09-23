@@ -5,6 +5,7 @@ import androidx.lifecycle.Observer
 import com.example.festivalvar.R
 import com.example.festivalvar.data.remote.model.comments.CommentsModel
 import com.example.festivalvar.data.remote.model.comments.FestivalCommentsUser
+import com.example.festivalvar.data.remote.model.comments.PostCommentModelRequest
 import com.example.festivalvar.data.remote.model.draws.DrawsModel
 import com.example.festivalvar.ui.base.BaseActivity
 import com.example.festivalvar.ui.draws.DrawsAdapter
@@ -43,6 +44,13 @@ class CommentsActivity : BaseActivity(), ICommentsNavigator, CommentsClickListen
     override fun initListener() {
         iv_back.setOnClickListener {
             finish()
+        }
+
+        icSend.setOnClickListener {
+            val etWriteComment = etWriteComment.text.toString()
+            val request = PostCommentModelRequest(1, etWriteComment)
+            viewModel.postComment(request)
+
         }
     }
 

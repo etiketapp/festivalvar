@@ -11,6 +11,8 @@ import com.example.festivalvar.data.remote.model.auth.register.RegisterRequest
 import com.example.festivalvar.data.remote.model.auth.register.RegisterResponse
 import com.example.festivalvar.data.remote.model.categories.CategoriesResponse
 import com.example.festivalvar.data.remote.model.comments.FestivalCommentsUserResponse
+import com.example.festivalvar.data.remote.model.comments.PostCommentModelRequest
+import com.example.festivalvar.data.remote.model.comments.PostCommentModelResponse
 import com.example.festivalvar.data.remote.model.draws.DrawsModelResponse
 import com.example.festivalvar.data.remote.model.festivallikes.FestivalLikesModelResponse
 import com.example.festivalvar.data.remote.model.user.UserResponse
@@ -41,6 +43,11 @@ class RemoteDataManager(
     private val drawsService: IDrawsService,
     private val categoryService: ICategoryService
 ) : IRemoteDataManager {
+
+    override suspend fun postFestivalCommentAsync(request: PostCommentModelRequest): ResultWrapper<PostCommentModelResponse> = withContext(Dispatchers.Main) {
+        resultWrapper(festivalService.postFestivalComment(request))
+    }
+
     override suspend fun getFestivalLikeUserAsync(festivalId: Int): ResultWrapper<FestivalLikesModelResponse> = withContext(Dispatchers.Main) {
         resultWrapper(festivalService.getFestivalLikes(festivalId))
 
