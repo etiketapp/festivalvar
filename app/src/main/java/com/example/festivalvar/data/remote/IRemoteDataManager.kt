@@ -13,7 +13,9 @@ import com.example.festivalvar.data.remote.model.comments.FestivalCommentsUserRe
 import com.example.festivalvar.data.remote.model.comments.PostCommentModelRequest
 import com.example.festivalvar.data.remote.model.comments.PostCommentModelResponse
 import com.example.festivalvar.data.remote.model.draws.DrawsModelResponse
+import com.example.festivalvar.data.remote.model.draws.join.DrawsJoinModelResponse
 import com.example.festivalvar.data.remote.model.festivallikes.FestivalLikesModelResponse
+import com.example.festivalvar.data.remote.model.festivallikes.FestivalLikesResponse
 import com.example.festivalvar.data.remote.model.user.UserResponse
 import com.example.festivalvar.data.remote.model.user.commentedfestivals.CommentedFestivalModelResponse
 import com.example.festivalvar.data.remote.model.user.draws.UserDrawsResponse
@@ -61,11 +63,16 @@ interface IRemoteDataManager {
     suspend fun getFestivalAsync(): ResultWrapper<FestivalModelResponse>
     suspend fun getFestivalCommentUserAsync(festivalId: Int): ResultWrapper<FestivalCommentsUserResponse>
     suspend fun getFestivalLikeUserAsync(festivalId: Int): ResultWrapper<FestivalLikesModelResponse>
+    suspend fun getFestivalLikeActAsync(festivalId: Int): ResultWrapper<FestivalLikesResponse>
+    suspend fun getFestivalDislikeActAsync(festivalId: Int): ResultWrapper<FestivalLikesResponse>
     suspend fun postFestivalCommentAsync(request: PostCommentModelRequest): ResultWrapper<PostCommentModelResponse>
 
 
     /** Draws **/
     suspend fun getDrawsAsync(): ResultWrapper<DrawsModelResponse>
+    suspend fun getDrawsJoinAsync(drawId: Int): ResultWrapper<DrawsJoinModelResponse>
+    suspend fun getDrawsDisjoinAsync(drawId: Int): ResultWrapper<DrawsJoinModelResponse>
+    suspend fun getDrawsUserAsync(drawId: Int): ResultWrapper<UserDrawsResponse>
 
 
 }

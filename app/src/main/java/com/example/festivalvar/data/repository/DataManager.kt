@@ -15,7 +15,9 @@ import com.example.festivalvar.data.remote.model.comments.FestivalCommentsUserRe
 import com.example.festivalvar.data.remote.model.comments.PostCommentModelRequest
 import com.example.festivalvar.data.remote.model.comments.PostCommentModelResponse
 import com.example.festivalvar.data.remote.model.draws.DrawsModelResponse
+import com.example.festivalvar.data.remote.model.draws.join.DrawsJoinModelResponse
 import com.example.festivalvar.data.remote.model.festivallikes.FestivalLikesModelResponse
+import com.example.festivalvar.data.remote.model.festivallikes.FestivalLikesResponse
 import com.example.festivalvar.data.remote.model.user.UserResponse
 import com.example.festivalvar.data.remote.model.user.commentedfestivals.CommentedFestivalModelResponse
 import com.example.festivalvar.data.remote.model.user.draws.UserDrawsResponse
@@ -31,6 +33,16 @@ class DataManager(
     private val remoteDataManager: RemoteDataManager,
     private val localDataManager: LocalDataManager
 ) : IDataManager {
+    override suspend fun getFestivalDislikeActAsync(festivalId: Int): ResultWrapper<FestivalLikesResponse> = remoteDataManager.getFestivalDislikeActAsync(festivalId)
+
+    override suspend fun getDrawsUserAsync(drawId: Int): ResultWrapper<UserDrawsResponse> = remoteDataManager.getDrawsUserAsync(drawId)
+
+    override suspend fun getFestivalLikeActAsync(festivalId: Int): ResultWrapper<FestivalLikesResponse> = remoteDataManager.getFestivalLikeActAsync(festivalId)
+
+    override suspend fun getDrawsDisjoinAsync(drawId: Int): ResultWrapper<DrawsJoinModelResponse> = remoteDataManager.getDrawsDisjoinAsync(drawId)
+
+    override suspend fun getDrawsJoinAsync(drawId: Int): ResultWrapper<DrawsJoinModelResponse> = remoteDataManager.getDrawsJoinAsync(drawId)
+
     override suspend fun postFestivalCommentAsync(request: PostCommentModelRequest): ResultWrapper<PostCommentModelResponse> = remoteDataManager.postFestivalCommentAsync(request)
 
     override suspend fun getFestivalLikeUserAsync(festivalId: Int): ResultWrapper<FestivalLikesModelResponse> = remoteDataManager.getFestivalLikeUserAsync(festivalId)

@@ -7,12 +7,11 @@ import com.example.festivalvar.data.remote.model.comments.FestivalCommentsUserRe
 import com.example.festivalvar.data.remote.model.comments.PostCommentModelRequest
 import com.example.festivalvar.data.remote.model.comments.PostCommentModelResponse
 import com.example.festivalvar.data.remote.model.festivallikes.FestivalLikesModelResponse
+import com.example.festivalvar.data.remote.model.festivallikes.FestivalLikesResponse
+import com.example.festivalvar.data.remote.model.user.likedfestivals.LikesModel
 import kotlinx.coroutines.Deferred
 import retrofit2.Response
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Path
+import retrofit2.http.*
 
 interface IFestivalService {
 
@@ -31,4 +30,12 @@ interface IFestivalService {
 
     @POST("festival/comment")
     fun postFestivalComment(@Body request: PostCommentModelRequest): Deferred<Response<PostCommentModelResponse>>
+
+
+    @GET("festival/like")
+    fun getFestivalLikeAct(@Query("festival_id") festivalId: Int): Deferred<Response<FestivalLikesResponse>>
+
+
+    @GET("festival/disLike")
+    fun getFestivalDislikeAct(@Query("festival_id") festivalId: Int): Deferred<Response<FestivalLikesResponse>>
 }

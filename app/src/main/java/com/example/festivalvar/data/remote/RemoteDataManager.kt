@@ -14,7 +14,9 @@ import com.example.festivalvar.data.remote.model.comments.FestivalCommentsUserRe
 import com.example.festivalvar.data.remote.model.comments.PostCommentModelRequest
 import com.example.festivalvar.data.remote.model.comments.PostCommentModelResponse
 import com.example.festivalvar.data.remote.model.draws.DrawsModelResponse
+import com.example.festivalvar.data.remote.model.draws.join.DrawsJoinModelResponse
 import com.example.festivalvar.data.remote.model.festivallikes.FestivalLikesModelResponse
+import com.example.festivalvar.data.remote.model.festivallikes.FestivalLikesResponse
 import com.example.festivalvar.data.remote.model.user.UserResponse
 import com.example.festivalvar.data.remote.model.user.commentedfestivals.CommentedFestivalModelResponse
 import com.example.festivalvar.data.remote.model.user.draws.UserDrawsResponse
@@ -43,6 +45,28 @@ class RemoteDataManager(
     private val drawsService: IDrawsService,
     private val categoryService: ICategoryService
 ) : IRemoteDataManager {
+    override suspend fun getFestivalDislikeActAsync(festivalId: Int): ResultWrapper<FestivalLikesResponse> = withContext(Dispatchers.Main) {
+        resultWrapper(festivalService.getFestivalDislikeAct(festivalId))
+
+    }
+
+    override suspend fun getFestivalLikeActAsync(festivalId: Int): ResultWrapper<FestivalLikesResponse> = withContext(Dispatchers.Main) {
+        resultWrapper(festivalService.getFestivalLikeAct(festivalId))
+    }
+
+    override suspend fun getDrawsUserAsync(drawId: Int): ResultWrapper<UserDrawsResponse> = withContext(Dispatchers.Main){
+        resultWrapper(drawsService.getDrawsUser(drawId))
+    }
+
+    override suspend fun getDrawsDisjoinAsync(drawId: Int): ResultWrapper<DrawsJoinModelResponse> = withContext(Dispatchers.Main){
+        resultWrapper(drawsService.getDrawsDisjoin(drawId))
+
+    }
+
+    override suspend fun getDrawsJoinAsync(drawId: Int): ResultWrapper<DrawsJoinModelResponse> = withContext(Dispatchers.Main) {
+        resultWrapper(drawsService.getDrawsJoin(drawId))
+
+    }
 
     override suspend fun postFestivalCommentAsync(request: PostCommentModelRequest): ResultWrapper<PostCommentModelResponse> = withContext(Dispatchers.Main) {
         resultWrapper(festivalService.postFestivalComment(request))

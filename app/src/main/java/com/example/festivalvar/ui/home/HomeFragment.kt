@@ -14,6 +14,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.annotation.RequiresApi
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
@@ -21,12 +22,14 @@ import com.bumptech.glide.request.transition.Transition
 import com.example.festivalvar.R
 import com.example.festivalvar.data.remote.model.FestivalModel.FestivalModel
 import com.example.festivalvar.data.remote.model.categories.Categories
+import com.example.festivalvar.data.remote.model.festivallikes.FestivalLikes
 import com.example.festivalvar.data.remote.model.location.LocationModel
 import com.example.festivalvar.ui.base.BaseFragment
 import com.example.festivalvar.ui.festivaldetail.FestivalDetailActivity
 import com.example.festivalvar.ui.home.festivaladapter.AdapterFestival
 import com.example.festivalvar.ui.home.festivaladapter.FestivalMapAdapter
 import com.example.festivalvar.ui.home.festivalviewholder.FestivalClickListener
+import com.example.festivalvar.ui.home.festivalviewholder.FestivalLikeClickListener
 import com.example.festivalvar.ui.home.festivalviewholder.FestivalMapClickListener
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -41,8 +44,10 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
 
-class HomeFragment : BaseFragment(), IHomeNavigator, FestivalClickListener, FestivalMapClickListener,
+class HomeFragment : BaseFragment(), IHomeNavigator, FestivalClickListener, FestivalLikeClickListener,
+    FestivalMapClickListener,
     OnMapReadyCallback {
+
 
     override val layoutId: Int
         get() = R.layout.fragment_home2
@@ -58,13 +63,16 @@ class HomeFragment : BaseFragment(), IHomeNavigator, FestivalClickListener, Fest
     var festivalLocations: ArrayList<LocationModel>? = arrayListOf()
     private var festivalModel: ArrayList<FestivalModel> = arrayListOf()
     private var categoryModel: ArrayList<Categories> = arrayListOf()
+    var isLikedData = MutableLiveData<FestivalModel>()
+    var festivalData: FestivalModel? = null
+
 
     var statement: Boolean = false
 
 
     private val viewModel by viewModel<HomeViewModel>()
 
-    private val festivalAdapter by lazy { AdapterFestival(arrayListOf(), this) }
+    private val festivalAdapter by lazy { AdapterFestival(arrayListOf(), this, this) }
     private val festivalMapAdapter by lazy { FestivalMapAdapter(arrayListOf(), this) }
 
 
@@ -88,6 +96,8 @@ class HomeFragment : BaseFragment(), IHomeNavigator, FestivalClickListener, Fest
         mapScrollable()
         observeViewModelFestival()
         observeViewModelCategories()
+        observeIsLiked()
+        observeFestivalLikesModel()
         viewModel.getFestivalList()
         viewModel.getCategoryList()
     }
@@ -123,6 +133,8 @@ class HomeFragment : BaseFragment(), IHomeNavigator, FestivalClickListener, Fest
         viewModel.festivalDataList.observe(this, Observer {
             initFestivals(it)
             festivalModel = it
+
+
         })
     }
 
@@ -131,6 +143,24 @@ class HomeFragment : BaseFragment(), IHomeNavigator, FestivalClickListener, Fest
             categoryModel = it
         })
     }
+
+    fun observeIsLiked(){
+
+        isLikedData.observe(this, object: Observer<FestivalModel> {
+            override fun onChanged(t: FestivalModel?) {
+                festivalData = t
+
+            }
+
+        })
+
+    }
+
+    fun observeFestivalLikesModel(){
+        viewModel.festivalLike.observe(this, Observer {
+        })
+    }
+
 
     private fun initFestivals(data: ArrayList<FestivalModel>) {
 
@@ -151,7 +181,16 @@ class HomeFragment : BaseFragment(), IHomeNavigator, FestivalClickListener, Fest
         context!!.launchActivity<FestivalDetailActivity> {
             this.putExtra("fromFestivalToDetail", model)
         }
+    }
 
+
+    override fun onClickLike(model: FestivalModel) {
+
+        if (!model.is_liked!!) {
+            viewModel.getFestivalLike(model.id)
+        } else {
+            viewModel.getFestivalDislike(model.id)
+        }
     }
 
     @SuppressLint("MissingPermission")
@@ -169,7 +208,7 @@ class HomeFragment : BaseFragment(), IHomeNavigator, FestivalClickListener, Fest
 
             festivalLatLng.forEachIndexed { index, it ->
 
-                if(categoryModel[festivalModel[index].category_id!!].title == "Müzik"){
+                if (categoryModel[festivalModel[index].category_id!!].title == "Müzik") {
 
                     Glide.with(context!!).asDrawable()
                         .load(categoryModel[festivalModel[index].category_id!!].image.url!!)
@@ -192,8 +231,7 @@ class HomeFragment : BaseFragment(), IHomeNavigator, FestivalClickListener, Fest
 
                         })
 
-                }
-                else if(categoryModel[festivalModel[index].category_id!!].title == "Festival") {
+                } else if (categoryModel[festivalModel[index].category_id!!].title == "Festival") {
 
                     Glide.with(context!!).asDrawable()
                         .load(categoryModel[festivalModel[index].category_id!!].image.url!!)
@@ -215,29 +253,7 @@ class HomeFragment : BaseFragment(), IHomeNavigator, FestivalClickListener, Fest
                             }
 
                         })
-                }
-                else if(categoryModel[festivalModel[index].category_id!!].title == "Yemek"){
-                    Glide.with(context!!).asDrawable()
-                        .load(categoryModel[festivalModel[index].category_id!!].image.url!!)
-                        .into(object : CustomTarget<Drawable>() {
-                            override fun onLoadCleared(placeholder: Drawable?) {
-
-                            }
-
-                            override fun onResourceReady(resource: Drawable, transition: Transition<in Drawable>?) {
-                                marker = map?.addMarker(
-                                    MarkerOptions().position(it).icon(
-                                        BitmapDescriptorFactory.fromBitmap(createCustomMarker(context!!, resource))
-                                    )
-                                )
-
-                                marker!!.tag = festivalModel[index]
-
-
-                            }
-
-                        })}
-                else if(categoryModel[festivalModel[index].category_id!!].title == "Spor"){
+                } else if (categoryModel[festivalModel[index].category_id!!].title == "Yemek") {
                     Glide.with(context!!).asDrawable()
                         .load(categoryModel[festivalModel[index].category_id!!].image.url!!)
                         .into(object : CustomTarget<Drawable>() {
@@ -258,8 +274,7 @@ class HomeFragment : BaseFragment(), IHomeNavigator, FestivalClickListener, Fest
                             }
 
                         })
-                }
-                else if(categoryModel[festivalModel[index].category_id!!].title == "Diğer"){
+                } else if (categoryModel[festivalModel[index].category_id!!].title == "Spor") {
                     Glide.with(context!!).asDrawable()
                         .load(categoryModel[festivalModel[index].category_id!!].image.url!!)
                         .into(object : CustomTarget<Drawable>() {
@@ -280,8 +295,28 @@ class HomeFragment : BaseFragment(), IHomeNavigator, FestivalClickListener, Fest
                             }
 
                         })
-                }
-                else if(categoryModel[festivalModel[index].category_id!!].title == "Teknoloji"){
+                } else if (categoryModel[festivalModel[index].category_id!!].title == "Diğer") {
+                    Glide.with(context!!).asDrawable()
+                        .load(categoryModel[festivalModel[index].category_id!!].image.url!!)
+                        .into(object : CustomTarget<Drawable>() {
+                            override fun onLoadCleared(placeholder: Drawable?) {
+
+                            }
+
+                            override fun onResourceReady(resource: Drawable, transition: Transition<in Drawable>?) {
+                                marker = map?.addMarker(
+                                    MarkerOptions().position(it).icon(
+                                        BitmapDescriptorFactory.fromBitmap(createCustomMarker(context!!, resource))
+                                    )
+                                )
+
+                                marker!!.tag = festivalModel[index]
+
+
+                            }
+
+                        })
+                } else if (categoryModel[festivalModel[index].category_id!!].title == "Teknoloji") {
 
                     Glide.with(context!!).asDrawable()
                         .load(categoryModel[festivalModel[index].category_id!!].image.url!!)
@@ -300,8 +335,7 @@ class HomeFragment : BaseFragment(), IHomeNavigator, FestivalClickListener, Fest
 
                             }
                         })
-                }
-                else {
+                } else {
                     Glide.with(context!!).asDrawable()
                         .load(categoryModel[festivalModel[index].category_id!!].image.url!!)
                         .into(object : CustomTarget<Drawable>() {
@@ -393,7 +427,6 @@ class HomeFragment : BaseFragment(), IHomeNavigator, FestivalClickListener, Fest
             }
         })
     }
-
 
 
 }
