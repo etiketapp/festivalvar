@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          xmlns:tools="http://schemas.android.com/tools" package="com.example.festivalvar">
+          xmlns:tools="http://schemas.android.com/tools"
+          package="com.example.festivalvar">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
@@ -20,12 +21,18 @@
             android:icon="@mipmap/ic_launcher"
             android:label="@string/app_name"
             android:roundIcon="@mipmap/ic_launcher_round"
-            android:usesCleartextTraffic="true"
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
-            tools:targetApi="n"
-            tools:ignore="GoogleAppIndexingWarning">
-        <uses-library android:name="org.apache.http.legacy" android:required="false" />
+            android:usesCleartextTraffic="true"
+            tools:ignore="GoogleAppIndexingWarning"
+            tools:targetApi="n">
+        <activity android:name=".ui.messages.messagedetail.MessageDetailActivity">
+        </activity>
+
+        <uses-library
+                android:name="org.apache.http.legacy"
+                android:required="false"/>
+
         <activity android:name=".ui.home.festivallikes.FestivalLikesActivity">
         </activity>
         <activity android:name=".ui.draws.drawsdetail.DrawsDetailActivity">

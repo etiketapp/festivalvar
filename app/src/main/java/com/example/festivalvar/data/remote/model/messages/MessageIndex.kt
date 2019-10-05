@@ -1,10 +1,13 @@
 package com.example.festivalvar.data.remote.model.messages
 
+import android.os.Parcelable
 import com.example.festivalvar.data.remote.model.messages.sendmodel.MessageSendModel
 import com.example.festivalvar.data.remote.model.user.User
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 class MessageIndex (
     @SerializedName("id")
     @Expose
@@ -24,4 +27,4 @@ class MessageIndex (
     @SerializedName("user_two")
     @Expose
     val user_two: User? = null
-)
+) : Parcelable

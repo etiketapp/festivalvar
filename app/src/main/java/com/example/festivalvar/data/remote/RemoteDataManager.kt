@@ -17,6 +17,9 @@ import com.example.festivalvar.data.remote.model.draws.DrawsModelResponse
 import com.example.festivalvar.data.remote.model.draws.join.DrawsJoinModelResponse
 import com.example.festivalvar.data.remote.model.festivallikes.FestivalLikesModelResponse
 import com.example.festivalvar.data.remote.model.festivallikes.FestivalLikesResponse
+import com.example.festivalvar.data.remote.model.messages.MessageIndexResponse
+import com.example.festivalvar.data.remote.model.messages.sendmodel.MessageSendModelRequest
+import com.example.festivalvar.data.remote.model.messages.sendmodel.MessageSendModelResponse
 import com.example.festivalvar.data.remote.model.user.UserResponse
 import com.example.festivalvar.data.remote.model.user.commentedfestivals.CommentedFestivalModelResponse
 import com.example.festivalvar.data.remote.model.user.draws.UserDrawsResponse
@@ -30,6 +33,7 @@ import com.example.festivalvar.data.remote.service.IAuthService
 import com.example.festivalvar.data.remote.service.IFestivalService
 import com.example.festivalvar.data.remote.service.categories.ICategoryService
 import com.example.festivalvar.data.remote.service.draws.IDrawsService
+import com.example.festivalvar.data.remote.service.messages.IMessageService
 import com.example.festivalvar.data.remote.service.user.IUserService
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
@@ -43,8 +47,19 @@ class RemoteDataManager(
     private val festivalService: IFestivalService,
     private val userService: IUserService,
     private val drawsService: IDrawsService,
-    private val categoryService: ICategoryService
+    private val categoryService: ICategoryService,
+    private val messageService: IMessageService
 ) : IRemoteDataManager {
+    override suspend fun getMessageIndexAsync(): ResultWrapper<MessageIndexResponse> = withContext(Dispatchers.Main){
+        resultWrapper(messageService.getMessageIndex())
+
+    }
+
+    override suspend fun postSendMessageAsync(request: MessageSendModelRequest): ResultWrapper<MessageSendModelResponse> = withContext(Dispatchers.Main) {
+        resultWrapper(messageService.postSendMessage(request))
+
+    }
+
     override suspend fun getFestivalDislikeActAsync(festivalId: Int): ResultWrapper<FestivalLikesResponse> = withContext(Dispatchers.Main) {
         resultWrapper(festivalService.getFestivalDislikeAct(festivalId))
 

@@ -16,6 +16,9 @@ import com.example.festivalvar.data.remote.model.draws.DrawsModelResponse
 import com.example.festivalvar.data.remote.model.draws.join.DrawsJoinModelResponse
 import com.example.festivalvar.data.remote.model.festivallikes.FestivalLikesModelResponse
 import com.example.festivalvar.data.remote.model.festivallikes.FestivalLikesResponse
+import com.example.festivalvar.data.remote.model.messages.MessageIndexResponse
+import com.example.festivalvar.data.remote.model.messages.sendmodel.MessageSendModelRequest
+import com.example.festivalvar.data.remote.model.messages.sendmodel.MessageSendModelResponse
 import com.example.festivalvar.data.remote.model.user.UserResponse
 import com.example.festivalvar.data.remote.model.user.commentedfestivals.CommentedFestivalModelResponse
 import com.example.festivalvar.data.remote.model.user.draws.UserDrawsResponse
@@ -73,6 +76,10 @@ interface IRemoteDataManager {
     suspend fun getDrawsJoinAsync(drawId: Int): ResultWrapper<DrawsJoinModelResponse>
     suspend fun getDrawsDisjoinAsync(drawId: Int): ResultWrapper<DrawsJoinModelResponse>
     suspend fun getDrawsUserAsync(drawId: Int): ResultWrapper<UserDrawsResponse>
+
+    /** Messages **/
+     suspend fun postSendMessageAsync(request: MessageSendModelRequest): ResultWrapper<MessageSendModelResponse>
+     suspend fun getMessageIndexAsync(): ResultWrapper<MessageIndexResponse>
 
 
 }
