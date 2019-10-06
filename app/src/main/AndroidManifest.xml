@@ -26,6 +26,8 @@
             android:usesCleartextTraffic="true"
             tools:ignore="GoogleAppIndexingWarning"
             tools:targetApi="n">
+        <activity android:name=".ui.draws.drawsusersactivity.DrawsUsersActivity">
+        </activity>
         <activity android:name=".ui.messages.messagedetail.MessageDetailActivity">
         </activity>
 

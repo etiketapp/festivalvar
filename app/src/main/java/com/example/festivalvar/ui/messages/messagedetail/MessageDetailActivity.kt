@@ -1,8 +1,10 @@
 package com.example.festivalvar.ui.messages.messagedetail
 
 import android.view.View
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import com.example.festivalvar.R
+import com.example.festivalvar.data.remote.model.FestivalModel.FestivalModel
 import com.example.festivalvar.data.remote.model.messages.MessageIndex
 import com.example.festivalvar.data.remote.model.messages.messagedetail.MessageDetailModel
 import com.example.festivalvar.data.remote.model.messages.sendmodel.MessageSendModelRequest
@@ -20,6 +22,9 @@ class MessageDetailActivity : BaseActivity(), IMessageDetailNavigator {
     private val viewModel by viewModel<MessageDetailViewModel>()
 
     private val messageDetailAdapter by lazy { MessageDetailAdapter(arrayListOf()) }
+    var messagesData = MutableLiveData<MessageDetailModel>()
+    var messagesDataUpdated = arrayListOf<MessageDetailModel>()
+
 
     val messageModel: MessageIndex by lazy {
         intent.getParcelableExtra( "fromMessageFragmentToMessageDetail") as MessageIndex
@@ -38,8 +43,6 @@ class MessageDetailActivity : BaseActivity(), IMessageDetailNavigator {
         observeMessageDetailViewModel()
         messageModel.user_two_id?.let { viewModel.getMessageDetailList(it) }
 
-
-
     }
 
     override fun initListener() {
@@ -51,7 +54,7 @@ class MessageDetailActivity : BaseActivity(), IMessageDetailNavigator {
             val etMessage = etWriteMessage.text.toString()
             val request = MessageSendModelRequest( "$etMessage", messageModel.user_two_id!!)
             viewModel.postSendMessage(request)
-
+            viewModel.getMessageDetailList(messageModel.user_two_id!!)
         }
     }
 
@@ -64,7 +67,17 @@ class MessageDetailActivity : BaseActivity(), IMessageDetailNavigator {
     fun observeMessageDetailViewModel(){
         viewModel.messageDetailDataList.observe(this, Observer {
             initMessageDetail(it)
+
         })
+    }
+    fun observeMessages(){
+
+        messagesData.observe(this, object: Observer<MessageDetailModel> {
+            override fun onChanged(t: MessageDetailModel?) {
+
+            }
+        })
+
     }
 
 }

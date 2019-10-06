@@ -51,6 +51,20 @@ class RemoteDataManager(
     private val categoryService: ICategoryService,
     private val messageService: IMessageService
 ) : IRemoteDataManager {
+    override suspend fun getUserProfileCommentedFestivalAsync(userId: Int): ResultWrapper<CommentedFestivalModelResponse> = withContext(Dispatchers.Main) {
+        resultWrapper(userService.getUserProfileComments(userId))
+    }
+
+    override suspend fun getUserProfileLikedFestivalAsync(userId: Int): ResultWrapper<LikedFestivalsModelResponse> = withContext(Dispatchers.Main) {
+        resultWrapper(userService.getUserProfileLikes(userId))
+
+    }
+
+    override suspend fun getUserProfileDrawsAsync(userId: Int): ResultWrapper<UserDrawsResponse> = withContext(Dispatchers.Main) {
+        resultWrapper(userService.getUserProfileDraws(userId))
+
+    }
+
     override suspend fun getMessageDetailAsync(userTwoId: Int): ResultWrapper<MessageDetailModelResponse> =
         withContext(Dispatchers.Main) {
             resultWrapper(messageService.getMessageDetail(userTwoId))

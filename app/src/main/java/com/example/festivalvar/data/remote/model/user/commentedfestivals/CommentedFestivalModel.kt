@@ -2,19 +2,20 @@ package com.example.festivalvar.data.remote.model.user.commentedfestivals
 
 import android.os.Parcelable
 import com.example.festivalvar.data.remote.model.FestivalModel.FestivalModel
+import com.example.festivalvar.data.remote.model.user.User
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-class CommentedFestivalModel (
+class CommentedFestivalModel(
 
     @SerializedName("id")
     @Expose
     val id: Int? = null,
     @SerializedName("comment")
     @Expose
-    val comment: String? =  null,
+    val comment: String? = null,
     @SerializedName("created_at")
     @Expose
     val created_at: String? = null,
@@ -29,5 +30,8 @@ class CommentedFestivalModel (
     val user_id: Int? = null,
     @SerializedName("festival")
     @Expose
-    val festival: FestivalModel? = null
-) : Parcelable
+    val festival: FestivalModel? = null,
+    @SerializedName("user")
+    @Expose
+    val user: User? = null
+    ) : Parcelable

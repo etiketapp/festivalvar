@@ -58,6 +58,9 @@ interface IRemoteDataManager {
     suspend fun getLikedFestivalsAsync(userId: Int): ResultWrapper<LikedFestivalsModelResponse>
     suspend fun getCommentedFestivalAsync(userId: Int): ResultWrapper<CommentedFestivalModelResponse>
     suspend fun getUserDrawsAsync(userId: Int): ResultWrapper<UserDrawsResponse>
+    suspend fun getUserProfileDrawsAsync(userId: Int): ResultWrapper<UserDrawsResponse>
+    suspend fun getUserProfileLikedFestivalAsync(userId: Int): ResultWrapper<LikedFestivalsModelResponse>
+    suspend fun getUserProfileCommentedFestivalAsync(userId: Int): ResultWrapper<CommentedFestivalModelResponse>
 
     /** Categories **/
     suspend fun getCategoryAsync(): ResultWrapper<CategoriesResponse>

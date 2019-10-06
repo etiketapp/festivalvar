@@ -40,7 +40,7 @@ class FestivalViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         ivLikeBackground.setOnClickListener {
             listenerLike.onClickLike(model)
 
-            if(model.is_liked!!){
+            if(model.is_liked){
                 ivLike.load(R.drawable.ic_heart_empty)
             } else {
                 ivLike.load(R.drawable.ic_heart_full)

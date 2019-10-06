@@ -1,10 +1,12 @@
 package com.example.festivalvar.ui.main
 
 import android.os.Build
+import android.os.Bundle
 import android.view.View
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import com.example.festivalvar.R
+import com.example.festivalvar.data.remote.model.festivallikes.FestivalLikes
 import com.example.festivalvar.ui.base.BaseActivity
 import com.example.festivalvar.ui.draws.DrawFragment
 import com.example.festivalvar.ui.home.HomeFragment
@@ -29,6 +31,7 @@ class MainActivity : BaseActivity(), IMainNavigator {
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun initUI() {
         replaceFragment(HomeFragment())
+        navigationDirects()
 
     }
 
@@ -93,5 +96,39 @@ class MainActivity : BaseActivity(), IMainNavigator {
         supportFragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).commit()
     }
 
+    fun navigationDirects() {
+
+        if (intent != null) {
+            /** FestivalLikes'tan Profile gidiyorsa **/
+            if (intent.hasExtra("fromFestivalLikesToProfileActivity")) {
+
+                val userId = intent.getIntExtra("fromFestivalLikesToProfileActivityData", 0)
+                intent.putExtra("fromFestivalLikesToProfileActivityData", userId)
+
+                bottom_navigation.selectedItemId = R.id.nav_profile
+                replaceFragment(ProfileFragment())
+
+                /**FesivalComments'tan Profile gidiyorsa**/
+            } else if (intent.hasExtra("fromCommentsActivityToProfileFragment")) {
+
+                val userId = intent.getIntExtra("fromCommentsActivityToProfileFragment", 0)
+                intent.putExtra("fromCommentsActivityToProfileFragment", userId)
+
+
+                bottom_navigation.selectedItemId = R.id.nav_profile
+                replaceFragment(ProfileFragment())
+
+
+            } else if(intent.hasExtra("fromUserDrawsToProfileFragment")){
+
+                val userId = intent.getIntExtra("fromUserDrawsToProfileFragment", 0)
+                intent.putExtra("fromUserDrawsToProfileFragment", userId)
+
+
+                bottom_navigation.selectedItemId = R.id.nav_profile
+                replaceFragment(ProfileFragment())
+            }
+        }
+    }
 
 }

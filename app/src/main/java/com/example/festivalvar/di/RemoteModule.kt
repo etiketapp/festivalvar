@@ -7,6 +7,7 @@ import com.example.festivalvar.data.remote.service.categories.ICategoryService
 import com.example.festivalvar.data.remote.service.draws.IDrawsService
 import com.example.festivalvar.data.remote.service.messages.IMessageService
 import com.example.festivalvar.data.remote.service.user.IUserService
+import com.example.festivalvar.ui.draws.drawsusersactivity.IUserDrawsNavigator
 import org.koin.dsl.module.module
 
 val remoteModule = module {

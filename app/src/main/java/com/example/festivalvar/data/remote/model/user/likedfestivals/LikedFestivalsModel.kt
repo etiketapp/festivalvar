@@ -2,6 +2,7 @@ package com.example.festivalvar.data.remote.model.user.likedfestivals
 
 import android.os.Parcelable
 import com.example.festivalvar.data.remote.model.FestivalModel.FestivalModel
+import com.example.festivalvar.data.remote.model.user.User
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
@@ -26,6 +27,9 @@ class LikedFestivalsModel (
     @SerializedName("festival")
     @Expose
     val festival: FestivalModel? = null,
+    @SerializedName("user")
+    @Expose
+    val user: User? = null,
     @SerializedName("likes")
     @Expose
     val likes: ArrayList<LikesModel>? = null

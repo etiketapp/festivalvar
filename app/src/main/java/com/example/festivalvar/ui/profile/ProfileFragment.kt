@@ -4,6 +4,7 @@ import android.view.View
 import androidx.lifecycle.Observer
 import com.addisonelliott.segmentedbutton.SegmentedButtonGroup
 import com.example.festivalvar.R
+import com.example.festivalvar.data.remote.model.festivallikes.FestivalLikes
 import com.example.festivalvar.data.remote.model.user.commentedfestivals.CommentedFestivalModel
 import com.example.festivalvar.data.remote.model.user.draws.UserDraws
 import com.example.festivalvar.data.remote.model.user.likedfestivals.LikedFestivalsModel
@@ -24,7 +25,8 @@ import kotlinx.android.synthetic.main.fragment_profile.*
 import kotlinx.android.synthetic.main.toolbar_layout.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class ProfileFragment : BaseFragment(), IProfileNavigator, FestivalLikeClickListener, FestivalCommentsClickListener, FestivalDrawsClickListener {
+class ProfileFragment : BaseFragment(), IProfileNavigator, FestivalLikeClickListener, FestivalCommentsClickListener,
+    FestivalDrawsClickListener {
 
     override val layoutId: Int
         get() = R.layout.fragment_profile
@@ -34,6 +36,7 @@ class ProfileFragment : BaseFragment(), IProfileNavigator, FestivalLikeClickList
     private val festivalLikeAdapter by lazy { FestivalLikeAdapter(arrayListOf(), this) }
     private val festivalCommentedAdapter by lazy { FestivalCommentAdapter(arrayListOf(), this) }
     private val userDrawsAdapter by lazy { FestivalDrawsAdapter(arrayListOf(), this) }
+    private var festivalProfileLikesData = arrayListOf<FestivalLikes>()
 
 
     override fun initNavigator() {
@@ -42,14 +45,52 @@ class ProfileFragment : BaseFragment(), IProfileNavigator, FestivalLikeClickList
 
     override fun initUI() {
 
+        var userId = activity!!.intent.getIntExtra("fromFestivalLikesToProfileActivityData", 0)
+        var userIdComment = activity!!.intent.getIntExtra("fromCommentsActivityToProfileFragment", 0)
+        var userIdDraw = activity!!.intent.getIntExtra("fromUserDrawsToProfileFragment", 0)
+
         observeViewModel()
 
         ivToolbarLogo.visibility = View.VISIBLE
         iv_list.visibility = View.GONE
 
-        viewModel.getFestivalLike(PrefUtils.getUserId())
-        viewModel.getFestivalComment(PrefUtils.getUserId())
-        viewModel.getUserDraws(PrefUtils.getUserId())
+
+        if (activity!!.intent.hasExtra("fromFestivalLikesToProfileActivityData")) {
+            viewModel.getProfileUserDraws(userId)
+            viewModel.getProfileFestivalLike(userId)
+            viewModel.getProfileFestivalComment(userId)
+        } else {
+
+            viewModel.getFestivalComment(PrefUtils.getUserId())
+            viewModel.getFestivalLike(PrefUtils.getUserId())
+            viewModel.getUserDraws(PrefUtils.getUserId())
+        }
+
+        if (activity!!.intent.hasExtra("fromCommentsActivityToProfileFragment")) {
+
+            viewModel.getProfileUserDraws(userIdComment)
+            viewModel.getProfileFestivalLike(userIdComment)
+            viewModel.getProfileFestivalComment(userIdComment)
+        } else {
+            viewModel.getFestivalComment(PrefUtils.getUserId())
+            viewModel.getFestivalLike(PrefUtils.getUserId())
+            viewModel.getUserDraws(PrefUtils.getUserId())
+
+
+        }
+
+        if (activity!!.intent.hasExtra("fromUserDrawsToProfileFragment")) {
+            viewModel.getProfileUserDraws(userIdDraw)
+            viewModel.getProfileFestivalLike(userIdDraw)
+            viewModel.getProfileFestivalComment(userIdDraw)
+
+        } else {
+
+            viewModel.getFestivalComment(PrefUtils.getUserId())
+            viewModel.getFestivalLike(PrefUtils.getUserId())
+            viewModel.getUserDraws(PrefUtils.getUserId())
+        }
+
         PrefUtils.getUser().image?.url?.let { ivProfile.load(it) }
 
         linearLikes.visibility = View.VISIBLE
@@ -60,7 +101,7 @@ class ProfileFragment : BaseFragment(), IProfileNavigator, FestivalLikeClickList
         handleSegmentedButton()
 
         ivSettings.setOnClickListener {
-            context!!.launchActivity<ProfileSettingsActivity> {  }
+            context!!.launchActivity<ProfileSettingsActivity> { }
         }
     }
 
@@ -86,7 +127,7 @@ class ProfileFragment : BaseFragment(), IProfileNavigator, FestivalLikeClickList
 
                 //showClinicUIVisible()
 
-            } else if(it == 2){
+            } else if (it == 2) {
 
                 linearLikes.visibility = View.GONE
                 linearComments.visibility = View.GONE
@@ -99,13 +140,13 @@ class ProfileFragment : BaseFragment(), IProfileNavigator, FestivalLikeClickList
         segmentedButtonGroupProfile.position
     }
 
-    fun initFestivalLiked(data: ArrayList<LikedFestivalsModel>){
+    fun initFestivalLiked(data: ArrayList<LikedFestivalsModel>) {
         rvFestivalLike.adapter = festivalLikeAdapter
         festivalLikeAdapter.add(data)
 
     }
 
-    fun initFestivalComments(data: ArrayList<CommentedFestivalModel>){
+    fun initFestivalComments(data: ArrayList<CommentedFestivalModel>) {
         rvFestivalComments.adapter = festivalCommentedAdapter
         festivalCommentedAdapter.add(data)
     }
@@ -115,7 +156,7 @@ class ProfileFragment : BaseFragment(), IProfileNavigator, FestivalLikeClickList
         userDrawsAdapter.add(data)
     }
 
-    fun observeViewModel(){
+    fun observeViewModel() {
         viewModel.festivalLikeDataList.observe(this, Observer {
             initFestivalLiked(it)
 

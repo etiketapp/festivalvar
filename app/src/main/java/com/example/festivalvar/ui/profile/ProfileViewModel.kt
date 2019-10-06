@@ -83,5 +83,71 @@ class ProfileViewModel(dataManager: DataManager): BaseViewModel<IProfileNavigato
         }
     }
 
+    fun getProfileFestivalLike(userId: Int) {
+        getNavigator()?.showLoading()
+        GlobalScope.launch(Dispatchers.Main) {
+            when (val result = withContext(Dispatchers.IO) { dataManager.getUserProfileLikedFestivalAsync(userId) }) {
+                is ResultWrapper.Success -> {
+                    getNavigator()?.hideLoading()
+                    festivalLikeDataList.value = result.data.data
+
+                }
+                is ResultWrapper.Error -> {
+                    getNavigator()?.hideLoading()
+                    getNavigator()?.onError(
+                        result.exception.message,
+                        result.exception.code
+                    )
+
+                }
+            }
+        }
+    }
+
+    fun getProfileFestivalComment(userId: Int) {
+        getNavigator()?.showLoading()
+        GlobalScope.launch(Dispatchers.Main) {
+            when (val result = withContext(Dispatchers.IO) { dataManager.getUserProfileCommentedFestivalAsync(userId) }) {
+                is ResultWrapper.Success -> {
+                    getNavigator()?.hideLoading()
+                    festivalCommentDataList.value = result.data.data
+
+                }
+                is ResultWrapper.Error -> {
+                    getNavigator()?.hideLoading()
+                    getNavigator()?.onError(
+                        result.exception.message,
+                        result.exception.code
+                    )
+
+                }
+            }
+        }
+    }
+
+    fun getProfileUserDraws(userId: Int) {
+        getNavigator()?.showLoading()
+        GlobalScope.launch(Dispatchers.Main) {
+            when (val result = withContext(Dispatchers.IO) { dataManager.getUserProfileDrawsAsync(userId) }) {
+                is ResultWrapper.Success -> {
+                    getNavigator()?.hideLoading()
+                    userDrawsDataList.value = result.data.data
+
+                }
+                is ResultWrapper.Error -> {
+                    getNavigator()?.hideLoading()
+                    getNavigator()?.onError(
+                        result.exception.message,
+                        result.exception.code
+                    )
+
+                }
+            }
+        }
+    }
+
+
+
+
 
 }

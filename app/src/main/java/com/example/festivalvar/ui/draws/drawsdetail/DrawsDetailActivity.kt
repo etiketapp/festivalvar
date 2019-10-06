@@ -8,7 +8,9 @@ import com.example.festivalvar.data.remote.model.FestivalModel.Galleries
 import com.example.festivalvar.data.remote.model.draws.DrawsModel
 import com.example.festivalvar.data.remote.model.user.draws.UserDraws
 import com.example.festivalvar.ui.base.BaseActivity
+import com.example.festivalvar.ui.draws.drawsusersactivity.DrawsUsersActivity
 import com.example.festivalvar.ui.festivaldetail.SliderViewPagerAdapter
+import com.mobillium.birebirdiyet.utils.extensions.launchActivity
 import kotlinx.android.synthetic.main.activity_draws_detail.*
 import kotlinx.android.synthetic.main.activity_festival_detail.*
 import kotlinx.android.synthetic.main.row_main_festival_item.*
@@ -48,7 +50,7 @@ class DrawsDetailActivity : BaseActivity(), IDrawsDetailNavigator {
         if (intent.getIntExtra("profileFragment", -1) == 1) {
             drawsProfileData = drawsUserModel
             initProfileData(drawsProfileData!!)
-            initSlider(drawsUserModel!!.draw?.galleries!!)
+            initSlider(drawsUserModel.draw?.galleries!!)
 
         } else {
             drawsData = drawsModel
@@ -62,6 +64,10 @@ class DrawsDetailActivity : BaseActivity(), IDrawsDetailNavigator {
     override fun initListener() {
         iv_back.setOnClickListener {
             finish()
+        }
+
+        cvJoinCount.setOnClickListener {
+            launchActivity<DrawsUsersActivity> {  }
         }
     }
 

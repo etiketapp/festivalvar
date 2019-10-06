@@ -3,7 +3,6 @@ package com.example.festivalvar.ui.messages.messagedetail
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.festivalvar.R
-import com.example.festivalvar.data.remote.model.messages.MessageIndex
 import com.example.festivalvar.data.remote.model.messages.messagedetail.MessageDetailModel
 import com.mobillium.birebirdiyet.utils.extensions.inflate
 
@@ -19,7 +18,14 @@ class MessageDetailAdapter(private val items : ArrayList<MessageDetailModel> = a
     private fun getItem(position: Int): MessageDetailModel = items[position]
 
     fun add(list: ArrayList<MessageDetailModel>) {
+        items.clear()
         items.addAll(list)
+        notifyDataSetChanged()
+    }
+
+
+    fun clear() {
+        items.clear()
         notifyDataSetChanged()
     }
 }

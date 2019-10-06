@@ -37,6 +37,12 @@ class DataManager(
     private val remoteDataManager: RemoteDataManager,
     private val localDataManager: LocalDataManager
 ) : IDataManager {
+    override suspend fun getUserProfileCommentedFestivalAsync(userId: Int): ResultWrapper<CommentedFestivalModelResponse> = remoteDataManager.getUserProfileCommentedFestivalAsync(userId)
+
+    override suspend fun getUserProfileLikedFestivalAsync(userId: Int): ResultWrapper<LikedFestivalsModelResponse> = remoteDataManager.getUserProfileLikedFestivalAsync(userId)
+
+    override suspend fun getUserProfileDrawsAsync(userId: Int): ResultWrapper<UserDrawsResponse> = remoteDataManager.getUserProfileDrawsAsync(userId)
+
     override suspend fun getMessageDetailAsync(userTwoId: Int): ResultWrapper<MessageDetailModelResponse> = remoteDataManager.getMessageDetailAsync(userTwoId)
 
     override suspend fun getMessageIndexAsync(): ResultWrapper<MessageIndexResponse> = remoteDataManager.getMessageIndexAsync()

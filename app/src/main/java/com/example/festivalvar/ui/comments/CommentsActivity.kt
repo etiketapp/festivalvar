@@ -9,14 +9,14 @@ import com.example.festivalvar.data.remote.model.comments.PostCommentModelReques
 import com.example.festivalvar.data.remote.model.draws.DrawsModel
 import com.example.festivalvar.ui.base.BaseActivity
 import com.example.festivalvar.ui.draws.DrawsAdapter
+import com.example.festivalvar.ui.main.MainActivity
+import com.mobillium.birebirdiyet.utils.extensions.launchActivity
 import kotlinx.android.synthetic.main.activity_comments.*
 import kotlinx.android.synthetic.main.toolbar_layout.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class CommentsActivity : BaseActivity(), ICommentsNavigator, CommentsClickListener {
-    override fun onClick(model: CommentsModel) {
 
-    }
 
     override val layoutId: Int?
         get() = R.layout.activity_comments
@@ -64,6 +64,13 @@ class CommentsActivity : BaseActivity(), ICommentsNavigator, CommentsClickListen
     fun initComments(data: ArrayList<CommentsModel>){
         rvCommentList.adapter = commentsAdapter
         commentsAdapter.add(data)
+    }
+
+    override fun onClick(model: CommentsModel) {
+        launchActivity<MainActivity> {
+            this.putExtra("fromCommentsActivityToProfileFragment", model.user_id)
+        }
+
     }
 
 }

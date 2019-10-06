@@ -42,5 +42,17 @@ interface IUserService {
     fun getUserDraws(@Path( "id") userId: Int): Deferred<Response<UserDrawsResponse>>
 
 
+    @GET("user/getProfileDraws")
+    fun getUserProfileDraws(@Query("user_id") userId: Int): Deferred<Response<UserDrawsResponse>>
+
+
+    @GET("user/getProfileLikes")
+    fun getUserProfileLikes(@Query("user_id") userId: Int): Deferred<Response<LikedFestivalsModelResponse>>
+
+
+    @GET("user/getProfileComments")
+    fun getUserProfileComments(@Query("user_id") userId: Int): Deferred<Response<CommentedFestivalModelResponse>>
+
+
 
 }
