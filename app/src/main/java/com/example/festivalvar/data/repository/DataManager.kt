@@ -19,6 +19,7 @@ import com.example.festivalvar.data.remote.model.draws.join.DrawsJoinModelRespon
 import com.example.festivalvar.data.remote.model.festivallikes.FestivalLikesModelResponse
 import com.example.festivalvar.data.remote.model.festivallikes.FestivalLikesResponse
 import com.example.festivalvar.data.remote.model.messages.MessageIndexResponse
+import com.example.festivalvar.data.remote.model.messages.messagedetail.MessageDetailModelResponse
 import com.example.festivalvar.data.remote.model.messages.sendmodel.MessageSendModelRequest
 import com.example.festivalvar.data.remote.model.messages.sendmodel.MessageSendModelResponse
 import com.example.festivalvar.data.remote.model.user.UserResponse
@@ -36,6 +37,8 @@ class DataManager(
     private val remoteDataManager: RemoteDataManager,
     private val localDataManager: LocalDataManager
 ) : IDataManager {
+    override suspend fun getMessageDetailAsync(userTwoId: Int): ResultWrapper<MessageDetailModelResponse> = remoteDataManager.getMessageDetailAsync(userTwoId)
+
     override suspend fun getMessageIndexAsync(): ResultWrapper<MessageIndexResponse> = remoteDataManager.getMessageIndexAsync()
 
     override suspend fun postSendMessageAsync(request: MessageSendModelRequest): ResultWrapper<MessageSendModelResponse> = remoteDataManager.postSendMessageAsync(request)

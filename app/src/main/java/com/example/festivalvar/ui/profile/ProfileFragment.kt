@@ -10,7 +10,6 @@ import com.example.festivalvar.data.remote.model.user.likedfestivals.LikedFestiv
 import com.example.festivalvar.ui.base.BaseFragment
 import com.example.festivalvar.ui.draws.drawsdetail.DrawsDetailActivity
 import com.example.festivalvar.ui.festivaldetail.FestivalDetailActivity
-import com.example.festivalvar.ui.home.festivaladapter.AdapterFestival
 import com.example.festivalvar.ui.profile.adapters.FestivalCommentAdapter
 import com.example.festivalvar.ui.profile.adapters.FestivalDrawsAdapter
 import com.example.festivalvar.ui.profile.adapters.FestivalLikeAdapter

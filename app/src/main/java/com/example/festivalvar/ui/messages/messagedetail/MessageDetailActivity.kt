@@ -1,10 +1,13 @@
 package com.example.festivalvar.ui.messages.messagedetail
 
 import android.view.View
+import androidx.lifecycle.Observer
 import com.example.festivalvar.R
 import com.example.festivalvar.data.remote.model.messages.MessageIndex
+import com.example.festivalvar.data.remote.model.messages.messagedetail.MessageDetailModel
 import com.example.festivalvar.data.remote.model.messages.sendmodel.MessageSendModelRequest
 import com.example.festivalvar.ui.base.BaseActivity
+import com.example.festivalvar.ui.messages.AdapterMessages
 import kotlinx.android.synthetic.main.activity_message_detail.*
 import kotlinx.android.synthetic.main.register_screen.*
 import kotlinx.android.synthetic.main.toolbar_layout.*
@@ -16,6 +19,7 @@ class MessageDetailActivity : BaseActivity(), IMessageDetailNavigator {
 
     private val viewModel by viewModel<MessageDetailViewModel>()
 
+    private val messageDetailAdapter by lazy { MessageDetailAdapter(arrayListOf()) }
 
     val messageModel: MessageIndex by lazy {
         intent.getParcelableExtra( "fromMessageFragmentToMessageDetail") as MessageIndex
@@ -30,6 +34,9 @@ class MessageDetailActivity : BaseActivity(), IMessageDetailNavigator {
         iv_back.visibility = View.VISIBLE
         tvToolbarTitle.visibility = View.VISIBLE
         tvToolbarTitle.text = messageModel.user_two?.full_name
+
+        observeMessageDetailViewModel()
+        messageModel.user_two_id?.let { viewModel.getMessageDetailList(it) }
 
 
 
@@ -46,6 +53,18 @@ class MessageDetailActivity : BaseActivity(), IMessageDetailNavigator {
             viewModel.postSendMessage(request)
 
         }
+    }
+
+    fun initMessageDetail(data: ArrayList<MessageDetailModel>){
+        rvMessadeDetailList.adapter = messageDetailAdapter
+        messageDetailAdapter.add(data)
+
+    }
+
+    fun observeMessageDetailViewModel(){
+        viewModel.messageDetailDataList.observe(this, Observer {
+            initMessageDetail(it)
+        })
     }
 
 }

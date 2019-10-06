@@ -18,6 +18,7 @@ import com.example.festivalvar.data.remote.model.draws.join.DrawsJoinModelRespon
 import com.example.festivalvar.data.remote.model.festivallikes.FestivalLikesModelResponse
 import com.example.festivalvar.data.remote.model.festivallikes.FestivalLikesResponse
 import com.example.festivalvar.data.remote.model.messages.MessageIndexResponse
+import com.example.festivalvar.data.remote.model.messages.messagedetail.MessageDetailModelResponse
 import com.example.festivalvar.data.remote.model.messages.sendmodel.MessageSendModelRequest
 import com.example.festivalvar.data.remote.model.messages.sendmodel.MessageSendModelResponse
 import com.example.festivalvar.data.remote.model.user.UserResponse
@@ -50,71 +51,88 @@ class RemoteDataManager(
     private val categoryService: ICategoryService,
     private val messageService: IMessageService
 ) : IRemoteDataManager {
-    override suspend fun getMessageIndexAsync(): ResultWrapper<MessageIndexResponse> = withContext(Dispatchers.Main){
+    override suspend fun getMessageDetailAsync(userTwoId: Int): ResultWrapper<MessageDetailModelResponse> =
+        withContext(Dispatchers.Main) {
+            resultWrapper(messageService.getMessageDetail(userTwoId))
+        }
+
+    override suspend fun getMessageIndexAsync(): ResultWrapper<MessageIndexResponse> = withContext(Dispatchers.Main) {
         resultWrapper(messageService.getMessageIndex())
 
     }
 
-    override suspend fun postSendMessageAsync(request: MessageSendModelRequest): ResultWrapper<MessageSendModelResponse> = withContext(Dispatchers.Main) {
-        resultWrapper(messageService.postSendMessage(request))
+    override suspend fun postSendMessageAsync(request: MessageSendModelRequest): ResultWrapper<MessageSendModelResponse> =
+        withContext(Dispatchers.Main) {
+            resultWrapper(messageService.postSendMessage(request))
 
-    }
+        }
 
-    override suspend fun getFestivalDislikeActAsync(festivalId: Int): ResultWrapper<FestivalLikesResponse> = withContext(Dispatchers.Main) {
-        resultWrapper(festivalService.getFestivalDislikeAct(festivalId))
+    override suspend fun getFestivalDislikeActAsync(festivalId: Int): ResultWrapper<FestivalLikesResponse> =
+        withContext(Dispatchers.Main) {
+            resultWrapper(festivalService.getFestivalDislikeAct(festivalId))
 
-    }
+        }
 
-    override suspend fun getFestivalLikeActAsync(festivalId: Int): ResultWrapper<FestivalLikesResponse> = withContext(Dispatchers.Main) {
-        resultWrapper(festivalService.getFestivalLikeAct(festivalId))
-    }
+    override suspend fun getFestivalLikeActAsync(festivalId: Int): ResultWrapper<FestivalLikesResponse> =
+        withContext(Dispatchers.Main) {
+            resultWrapper(festivalService.getFestivalLikeAct(festivalId))
+        }
 
-    override suspend fun getDrawsUserAsync(drawId: Int): ResultWrapper<UserDrawsResponse> = withContext(Dispatchers.Main){
-        resultWrapper(drawsService.getDrawsUser(drawId))
-    }
+    override suspend fun getDrawsUserAsync(drawId: Int): ResultWrapper<UserDrawsResponse> =
+        withContext(Dispatchers.Main) {
+            resultWrapper(drawsService.getDrawsUser(drawId))
+        }
 
-    override suspend fun getDrawsDisjoinAsync(drawId: Int): ResultWrapper<DrawsJoinModelResponse> = withContext(Dispatchers.Main){
-        resultWrapper(drawsService.getDrawsDisjoin(drawId))
+    override suspend fun getDrawsDisjoinAsync(drawId: Int): ResultWrapper<DrawsJoinModelResponse> =
+        withContext(Dispatchers.Main) {
+            resultWrapper(drawsService.getDrawsDisjoin(drawId))
 
-    }
+        }
 
-    override suspend fun getDrawsJoinAsync(drawId: Int): ResultWrapper<DrawsJoinModelResponse> = withContext(Dispatchers.Main) {
-        resultWrapper(drawsService.getDrawsJoin(drawId))
+    override suspend fun getDrawsJoinAsync(drawId: Int): ResultWrapper<DrawsJoinModelResponse> =
+        withContext(Dispatchers.Main) {
+            resultWrapper(drawsService.getDrawsJoin(drawId))
 
-    }
+        }
 
-    override suspend fun postFestivalCommentAsync(request: PostCommentModelRequest): ResultWrapper<PostCommentModelResponse> = withContext(Dispatchers.Main) {
-        resultWrapper(festivalService.postFestivalComment(request))
-    }
+    override suspend fun postFestivalCommentAsync(request: PostCommentModelRequest): ResultWrapper<PostCommentModelResponse> =
+        withContext(Dispatchers.Main) {
+            resultWrapper(festivalService.postFestivalComment(request))
+        }
 
-    override suspend fun getFestivalLikeUserAsync(festivalId: Int): ResultWrapper<FestivalLikesModelResponse> = withContext(Dispatchers.Main) {
-        resultWrapper(festivalService.getFestivalLikes(festivalId))
+    override suspend fun getFestivalLikeUserAsync(festivalId: Int): ResultWrapper<FestivalLikesModelResponse> =
+        withContext(Dispatchers.Main) {
+            resultWrapper(festivalService.getFestivalLikes(festivalId))
 
-    }
+        }
 
-    override suspend fun getFestivalCommentUserAsync(festivalId: Int): ResultWrapper<FestivalCommentsUserResponse> = withContext(Dispatchers.Main){
-        resultWrapper(festivalService.getUserComments(festivalId))
+    override suspend fun getFestivalCommentUserAsync(festivalId: Int): ResultWrapper<FestivalCommentsUserResponse> =
+        withContext(Dispatchers.Main) {
+            resultWrapper(festivalService.getUserComments(festivalId))
 
-    }
+        }
 
     override suspend fun getCategoryAsync(): ResultWrapper<CategoriesResponse> = withContext(Dispatchers.Main) {
         resultWrapper(categoryService.getCategroies())
 
     }
 
-    override suspend fun getUserDrawsAsync(userId: Int): ResultWrapper<UserDrawsResponse> = withContext(Dispatchers.Main){
-        resultWrapper(userService.getUserDraws(userId))
+    override suspend fun getUserDrawsAsync(userId: Int): ResultWrapper<UserDrawsResponse> =
+        withContext(Dispatchers.Main) {
+            resultWrapper(userService.getUserDraws(userId))
 
-    }
+        }
 
-    override suspend fun getCommentedFestivalAsync(userId: Int): ResultWrapper<CommentedFestivalModelResponse> = withContext(Dispatchers.Main) {
-        resultWrapper(userService.getCommentedFestivals(userId))
-    }
+    override suspend fun getCommentedFestivalAsync(userId: Int): ResultWrapper<CommentedFestivalModelResponse> =
+        withContext(Dispatchers.Main) {
+            resultWrapper(userService.getCommentedFestivals(userId))
+        }
 
-    override suspend fun getLikedFestivalsAsync(userId: Int): ResultWrapper<LikedFestivalsModelResponse> = withContext(Dispatchers.Main) {
-        resultWrapper(userService.getLikedFestivals(userId))
+    override suspend fun getLikedFestivalsAsync(userId: Int): ResultWrapper<LikedFestivalsModelResponse> =
+        withContext(Dispatchers.Main) {
+            resultWrapper(userService.getLikedFestivals(userId))
 
-    }
+        }
 
     override suspend fun putPaswwordUpdateAsync(
         request: UserUpdatePasswordRequest,
@@ -146,32 +164,34 @@ class RemoteDataManager(
                 _method,
                 image,
                 full_name,
-                email)
+                email
+            )
         )
     }
 
-    override suspend fun getFestivalAsync(): ResultWrapper<FestivalModelResponse>  = withContext(Dispatchers.Main){
+    override suspend fun getFestivalAsync(): ResultWrapper<FestivalModelResponse> = withContext(Dispatchers.Main) {
         resultWrapper(festivalService.getFestivals())
     }
 
-    override suspend fun postForgotPasswordAsync(request: ForgotPasswordRequest): ResultWrapper<ForgotPasswordResponse> = withContext(Dispatchers.Main) {
-        resultWrapper(authService.postForgotPassword(request))
-    }
+    override suspend fun postForgotPasswordAsync(request: ForgotPasswordRequest): ResultWrapper<ForgotPasswordResponse> =
+        withContext(Dispatchers.Main) {
+            resultWrapper(authService.postForgotPassword(request))
+        }
 
     override suspend fun postLogoutAsync(): ResultWrapper<LogoutResponse> = withContext(Dispatchers.Main) {
         resultWrapper(authService.postLogout())
     }
 
-    override suspend fun postLoginAsync(request: LoginRequest): ResultWrapper<LoginResponse> = withContext(Dispatchers.Main){
-        resultWrapper(authService.postLogin(request))
+    override suspend fun postLoginAsync(request: LoginRequest): ResultWrapper<LoginResponse> =
+        withContext(Dispatchers.Main) {
+            resultWrapper(authService.postLogin(request))
 
-    }
+        }
 
-    override suspend fun postRegisterAsync(request: RegisterRequest): ResultWrapper<RegisterResponse> = withContext(Dispatchers.Main) {
-        resultWrapper(authService.postRegister(request))
-    }
-
-
+    override suspend fun postRegisterAsync(request: RegisterRequest): ResultWrapper<RegisterResponse> =
+        withContext(Dispatchers.Main) {
+            resultWrapper(authService.postRegister(request))
+        }
 
 
     private suspend inline fun <reified T : Any> resultWrapper(request: Deferred<Response<T>>): ResultWrapper<T> {
