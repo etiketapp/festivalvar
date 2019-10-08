@@ -21,6 +21,7 @@ class DrawsAdapter(private val items : ArrayList<DrawsModel> = arrayListOf(), pr
     private fun getItem(position: Int): DrawsModel = items[position]
 
     fun add(list: ArrayList<DrawsModel>) {
+        items.clear()
         items.addAll(list)
         notifyDataSetChanged()
     }

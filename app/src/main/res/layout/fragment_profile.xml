@@ -25,7 +25,7 @@
                     android:layout_height="100dp"
                     android:layout_marginTop="24dp"
                     android:layout_gravity="center"
-                    android:src="@drawable/ic_profile"/>
+                    android:src="@color/grey"/>
 
             <ImageView
                     android:id="@+id/ivSettings"
