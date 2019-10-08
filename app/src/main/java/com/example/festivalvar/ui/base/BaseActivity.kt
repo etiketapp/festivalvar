@@ -49,6 +49,7 @@ abstract class BaseActivity : AppCompatActivity(), IBaseNavigator {
     var birthDateValue: String? = ""
     var photoFile: File? = null
     var imageFilePath: String? = null
+    val REQUEST_IMAGE = 100
 
 
     protected abstract fun initNavigator()

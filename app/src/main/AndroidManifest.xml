@@ -26,6 +26,8 @@
             android:usesCleartextTraffic="true"
             tools:ignore="GoogleAppIndexingWarning"
             tools:targetApi="n">
+        <activity android:name=".utils.extensions.ImagePickerActivity">
+        </activity>
         <activity android:name=".ui.draws.drawsusersactivity.DrawsUsersActivity">
         </activity>
         <activity android:name=".ui.messages.messagedetail.MessageDetailActivity">
@@ -57,6 +59,20 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <activity
+                android:name="com.yalantis.ucrop.UCropActivity"
+                android:screenOrientation="portrait"
+                android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+
+        <provider
+                android:name="androidx.core.content.FileProvider"
+                android:authorities="${applicationId}.provider"
+                android:exported="false"
+                android:grantUriPermissions="true">
+            <meta-data
+                    android:name="android.support.FILE_PROVIDER_PATHS"
+                    android:resource="@xml/file_paths"/>
+        </provider>
         <activity
                 android:name=".ui.main.MainActivity"
                 android:launchMode="singleTop"

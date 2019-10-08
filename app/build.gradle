@@ -117,4 +117,9 @@ dependencies {
         exclude group: 'glide-parent'
     }
     annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
+
+    implementation "com.karumi:dexter:5.0.0"
+    implementation 'com.github.yalantis:ucrop:2.2.2'
+
+
 }
