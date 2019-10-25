@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:orientation="vertical"
+        android:layout_width="230dp"
+        android:layout_height="120dp">
+
+    <androidx.cardview.widget.CardView
+            android:id="@+id/cvFestivalMapItem"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="4dp"
+            android:layout_marginStart="8dp"
+            app:cardCornerRadius="7dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+            <ImageView
+                    android:id="@+id/ivFestivalMapItem"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintWidth_percent="0.43"
+                    app:layout_constraintDimensionRatio="w, 1:1"
+                    android:background="@drawable/bg_header"
+                    android:scaleType="centerCrop"
+                    android:adjustViewBounds="true"
+                    android:layout_margin="8dp"/>
+
+            <Button
+                    android:id="@+id/btnMapItemFestivalType"
+                    android:layout_width="0dp"
+                    android:layout_height="16dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/ivFestivalMapItem"
+                    app:layout_constraintWidth_percent="0.3"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginStart="10dp"
+                    android:background="@drawable/bg_festival_green_button"
+                    android:text="PERFORMANS"
+                    style="@style/SmallButtonText"/>
+
+            <TextView
+                    android:id="@+id/tvMapItemFestivalTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/btnMapItemFestivalType"
+                    app:layout_constraintStart_toStartOf="@id/btnMapItemFestivalType"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    style="@style/ItemTitleTextStyle"
+                    android:text="Dansın Ritmi"/>
+
+            <TextView
+                    android:id="@+id/tvMapItemFestivalDate"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/tvMapItemFestivalTitle"
+                    app:layout_constraintStart_toStartOf="@id/tvMapItemFestivalTitle"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginEnd="16dp"
+                    style="@style/ItemContentTextStyle"
+                    android:text="10.10.2019"/>
+
+            <TextView
+                    android:id="@+id/tvMapItemFestivalLocation"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/tvMapItemFestivalDate"
+                    app:layout_constraintStart_toStartOf="@id/tvMapItemFestivalDate"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginEnd="16dp"
+                    android:fontFamily="@font/q_regular"
+                    android:textSize="9sp"
+                    android:textColor="@color/grey"
+                    android:text="Volkswagen Arena"/>
+
+            <ImageView
+                    android:id="@+id/ivMapItemCost"
+                    android:layout_width="20dp"
+                    android:layout_height="16dp"
+                    app:layout_constraintTop_toBottomOf="@id/tvMapItemFestivalLocation"
+                    app:layout_constraintStart_toStartOf="@id/tvMapItemFestivalLocation"
+                    app:layout_constraintBottom_toBottomOf="@id/ivFestivalMapItem"
+                    android:layout_marginTop="4dp"
+                    android:background="@drawable/ic_heart_full"/>
+
+            <TextView
+                    android:id="@+id/tvMapItemCost"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    app:layout_constraintTop_toTopOf="@id/ivMapItemCost"
+                    app:layout_constraintBottom_toBottomOf="@id/ivMapItemCost"
+                    app:layout_constraintVertical_bias="0.0"
+                    app:layout_constraintStart_toEndOf="@id/ivMapItemCost"
+                    android:layout_marginBottom="2dp"
+                    android:layout_marginStart="8dp"
+                    android:includeFontPadding="false"
+                    android:textColor="@color/main_purple"
+                    android:textSize="14sp"
+                    android:fontFamily="@font/q_medium"
+                    android:text="180 TL"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
