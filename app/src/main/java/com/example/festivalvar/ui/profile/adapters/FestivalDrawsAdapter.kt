@@ -24,6 +24,7 @@ class FestivalDrawsAdapter(private val items : ArrayList<UserDraws> = arrayListO
     private fun getItem(position: Int): UserDraws = items[position]
 
     fun add(list: ArrayList<UserDraws>) {
+        items.clear()
         items.addAll(list)
         notifyDataSetChanged()
     }

@@ -1,6 +1,11 @@
 package com.example.festivalvar.ui.profile
 
+import android.app.Activity
+import android.content.Intent
+import android.net.Uri
+import android.provider.MediaStore
 import android.view.View
+import android.widget.ImageView
 import androidx.lifecycle.Observer
 import com.addisonelliott.segmentedbutton.SegmentedButtonGroup
 import com.example.festivalvar.R
@@ -24,6 +29,7 @@ import com.mobillium.birebirdiyet.utils.extensions.load
 import kotlinx.android.synthetic.main.fragment_profile.*
 import kotlinx.android.synthetic.main.toolbar_layout.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.io.IOException
 
 class ProfileFragment : BaseFragment(), IProfileNavigator, FestivalLikeClickListener, FestivalCommentsClickListener,
     FestivalDrawsClickListener {
@@ -37,6 +43,12 @@ class ProfileFragment : BaseFragment(), IProfileNavigator, FestivalLikeClickList
     private val festivalCommentedAdapter by lazy { FestivalCommentAdapter(arrayListOf(), this) }
     private val userDrawsAdapter by lazy { FestivalDrawsAdapter(arrayListOf(), this) }
     private var festivalProfileLikesData = arrayListOf<FestivalLikes>()
+
+    val REQUEST_IMAGE = 100
+
+    private var uri: Uri? = null
+    lateinit var image: ImageView
+
 
 
     override fun initNavigator() {
@@ -193,6 +205,27 @@ class ProfileFragment : BaseFragment(), IProfileNavigator, FestivalLikeClickList
             this.putExtra("fromProfileToFestivalDetail", model)
             this.putExtra("profileFragment", 1)
         }
+
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == REQUEST_IMAGE && data != null) {
+            if (resultCode == Activity.RESULT_OK) {
+                uri = data.getParcelableExtra<Uri>("path")
+                try {
+                    // You can update this bitmap to your server
+                    //val bitmap = MediaStore.Images.Media.getBitmap(this.contentResolver, uri)
+                    // loading profile image from local cache
+                    image.load(uri.toString())
+                } catch (e: IOException) {
+                    e.printStackTrace()
+                }
+
+            }
+        }
+
 
     }
 

@@ -12,10 +12,15 @@ class FestivalDrawsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView
         /*
                 tvProfileNameItem.text = model.title
                 tvProfileDetailItem.text = model.title*/
-        ivFestivalItem.load(model.draw?.galleries?.get(0)?.image?.url!!)
+        if(!model.draw?.galleries.isNullOrEmpty()){
+            if(model.draw?.galleries?.get(0)?.image?.url != null){
+                ivFestivalItem.load(model.draw.galleries.get(0).image.url!!)
+            }
+
+        }
         //Glide.with(context).load(model.image?.url).into(ivFestivalItem)
-        tvFestivalTitle.text = model.draw.title
-        tvFestivalSubtitle.text = model.draw.sub_title
+        tvFestivalTitle.text = model.draw?.title
+        tvFestivalSubtitle.text = model.draw?.sub_title
         //tvFestivalCost.text = (model.draw.price + " TL")
         //tvFesivalLocation.text = model.draw.place
         //if(model.draw.distance != null)tvFestivalDistance.text = model.draw.distance.toString()
