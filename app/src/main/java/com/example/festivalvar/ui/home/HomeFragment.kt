@@ -16,6 +16,8 @@ import android.widget.ImageView
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearSnapHelper
+import androidx.recyclerview.widget.SnapHelper
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
@@ -46,8 +48,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeFragment : BaseFragment(), IHomeNavigator, FestivalClickListener, FestivalLikeClickListener,
     FestivalMapClickListener,
-    OnMapReadyCallback {
-
+    OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
     override val layoutId: Int
         get() = R.layout.fragment_home2
@@ -167,6 +168,8 @@ class HomeFragment : BaseFragment(), IHomeNavigator, FestivalClickListener, Fest
         rvFestivalList.adapter = festivalAdapter
         festivalAdapter.add(data)
 
+        val helper = LinearSnapHelper()
+        helper.attachToRecyclerView(rvFestivalMapList)
         rvFestivalMapList.adapter = festivalMapAdapter
         festivalMapAdapter.add(data)
 
@@ -193,10 +196,13 @@ class HomeFragment : BaseFragment(), IHomeNavigator, FestivalClickListener, Fest
         }
     }
 
+
+
     @SuppressLint("MissingPermission")
     override fun onMapReady(googleMap: GoogleMap?) {
 
         map = googleMap
+        map?.setOnMarkerClickListener(this)
 
         map?.setOnMapLoadedCallback {
 
@@ -398,6 +404,13 @@ class HomeFragment : BaseFragment(), IHomeNavigator, FestivalClickListener, Fest
         val mapFragment = childFragmentManager
             .findFragmentById(R.id.mapFestival) as SupportMapFragment?
         mapFragment?.getMapAsync(this)
+    }
+
+    override fun onMarkerClick(marker: Marker?): Boolean {
+        val festival = marker?.tag as FestivalModel
+        festivalMapAdapter.getPositionById(festival.id)
+        rvFestivalMapList.smoothScrollToPosition(festival.id)
+        return true
     }
 
     private fun mapScrollable() {

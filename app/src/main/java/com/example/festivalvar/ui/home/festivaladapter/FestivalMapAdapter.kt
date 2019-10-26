@@ -23,4 +23,15 @@ class FestivalMapAdapter(private val items : ArrayList<FestivalModel> = arrayLis
         items.addAll(list)
         notifyDataSetChanged()
     }
+
+    fun getPositionById(id: Int) : Int {
+
+        items.forEachIndexed { index, element ->
+            if (element.id == id) {
+                return index
+            }
+        }
+
+        return 0
+    }
 }
