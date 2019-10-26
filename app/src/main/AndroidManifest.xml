@@ -47,7 +47,8 @@
         </activity>
         <activity android:name=".ui.festivaldetail.FestivalDetailActivity">
         </activity>
-        <activity android:name=".ui.auth.LoginRegisterActivity">
+        <activity android:name=".ui.auth.LoginRegisterActivity"
+                android:windowSoftInputMode="stateVisible|adjustPan">
         </activity>
         <activity
                 android:name=".ui.splash.SplashActivity"
