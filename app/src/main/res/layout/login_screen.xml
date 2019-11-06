@@ -18,7 +18,7 @@
             android:layout_marginTop="24dp"
             android:paddingStart="16dp"
             android:textCursorDrawable="@color/white"
-
+            android:singleLine="true"
             android:fontFamily="@font/q_regular"
             android:textSize="14sp"
             android:hint="@string/auth_mail"
@@ -34,7 +34,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginStart="24dp"
             android:textCursorDrawable="@color/white"
-
+            android:singleLine="true"
             android:layout_marginEnd="24dp"
             android:background="@drawable/bg_edittext"
             android:layout_marginTop="24dp"
