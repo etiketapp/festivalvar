@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "167903353801",
+    "firebase_url": "https://festival-var-253014.firebaseio.com",
+    "project_id": "festival-var-253014",
+    "storage_bucket": "festival-var-253014.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:167903353801:android:f106d3e8cb500596e1a618",
+        "android_client_info": {
+          "package_name": "com.example.festivalvar"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "167903353801-t0tnfusv4g5953ag0njl18q9ooedl775.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCirQ1FCI4WWWbMAOGeyKxNk-AHKlVwDK4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "167903353801-t0tnfusv4g5953ag0njl18q9ooedl775.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "167903353801-3v5dii33281bn7m30c0m0l0jvoqnp4bt.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.tunayalver.festivalvar"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
